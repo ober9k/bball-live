@@ -1,0 +1,32 @@
+<div class="border-1 border-gray-300">
+  <table class="w-full">
+    <thead>
+    <tr class="border-b border-gray-300 bg-gray-200">
+      <th class="w-auto p-1 text-left">&nbsp;</th>
+      <th class="w-12 p-1 text-center">PTS</th>
+      <th class="w-12 p-1 text-center">REB</th>
+      <th class="w-12 p-1 text-center">AST</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (playerStatsLog of playerStatsLogs(); track playerStatsLog.id) {
+        <tr class="odd:bg-gray-100">
+          <td class="w-auto p-1">
+            {{ playerStatsLog.player.name }}
+          </td>
+          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.points }}</td>
+          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.rebounds }}</td>
+          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.assists }}</td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+    <tr class="border-t border-gray-200">
+      <th class="w-auto p-1 text-left">Totals</th>
+      <th class="w-12 p-1 text-center">{{ playerStatsTotals().points }}</th>
+      <th class="w-12 p-1 text-center">{{ playerStatsTotals().rebounds }}</th>
+      <th class="w-12 p-1 text-center">{{ playerStatsTotals().assists }}</th>
+    </tr>
+    </tfoot>
+  </table>
+</div>
