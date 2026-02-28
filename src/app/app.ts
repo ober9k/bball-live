@@ -74,22 +74,7 @@ export class App implements OnDestroy {
       return [ ... playerStagsLogs ];
     });
 
-    let action: ActionType;
-
-    switch (value) {
-      case 3:
-        action = Action.Point_3;
-        break;
-      case 2:
-        action = Action.Point_2;
-        break
-      case 1:
-      default:
-        action = Action.Point_1;
-        break;
-    }
-
-    this.pushEventLog(playerStatsLog.player, action);
+    this.pushEventLog(playerStatsLog.player, App.getPointActionType(value));
   }
 
   /**
@@ -151,6 +136,22 @@ export class App implements OnDestroy {
     };
 
     return { id: player.id, player, stats };
+  }
+
+  /**
+   * This may end up redundant when made/attempted logic is applied.
+   * @param value
+   * @private
+   */
+  private static getPointActionType(value: number): ActionType {
+    switch (value) {
+      case 3:
+        return Action.Point_3;
+      case 2:
+        return Action.Point_2;
+      default:
+        return Action.Point_1;
+    }
   }
 
 }
