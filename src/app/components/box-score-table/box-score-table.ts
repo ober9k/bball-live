@@ -1,3 +1,5 @@
+import { PointsPipe } from '@/pipes/stats/points-pipe';
+import { ReboundsPipe } from '@/pipes/stats/rebounds-pipe';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
 import { Component, computed, input } from '@angular/core';
 
@@ -5,6 +7,10 @@ import { Component, computed, input } from '@angular/core';
   selector: 'app-box-score-table',
   templateUrl: './box-score-table.html',
   standalone: true,
+  imports: [
+    PointsPipe,
+    ReboundsPipe
+  ]
 })
 export class BoxScoreTable {
 
