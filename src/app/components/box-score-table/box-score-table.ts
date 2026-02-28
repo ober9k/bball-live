@@ -15,13 +15,21 @@ export class BoxScoreTable {
       .reduce((acc, log) => {
         return {
           points: acc.points + log.stats.points,
-          rebounds: acc.rebounds + log.stats.rebounds,
+          offRebounds: acc.offRebounds + log.stats.offRebounds,
+          defRebounds: acc.defRebounds + log.stats.defRebounds,
           assists: acc.assists + log.stats.assists,
+          steals: acc.steals + log.stats.steals,
+          blocks: acc.blocks + log.stats.blocks,
+          turnovers: acc.turnovers + log.stats.turnovers,
         };
       }, {
         points: 0,
-        rebounds: 0,
+        offRebounds: 0,
+        defRebounds: 0,
         assists: 0,
+        steals: 0,
+        blocks: 0,
+        turnovers: 0,
       });
   });
 

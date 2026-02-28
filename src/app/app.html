@@ -44,8 +44,12 @@
                 <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 1)">FTM</button>
                 <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 2)">2PM</button>
                 <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 2)">3PM</button>
-                <button [ngClass]="cssButtonClasses" (click)="addRebounds(playerStatsLog, 1)">REB</button>
+                <button [ngClass]="cssButtonClasses" (click)="addOffRebound(playerStatsLog, 1)">OREB</button>
+                <button [ngClass]="cssButtonClasses" (click)="addDefRebound(playerStatsLog, 1)">DREB</button>
                 <button [ngClass]="cssButtonClasses" (click)="addAssists(playerStatsLog, 1)">AST</button>
+                <button [ngClass]="cssButtonClasses" (click)="addSteals(playerStatsLog, 1)">STL</button>
+                <button [ngClass]="cssButtonClasses" (click)="addBlocks(playerStatsLog, 1)">BLK</button>
+                <button [ngClass]="cssButtonClasses" (click)="addTurnovers(playerStatsLog, 1)">TO</button>
               </td>
             </tr>
           }

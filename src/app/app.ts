@@ -60,7 +60,7 @@ export class App implements OnDestroy {
   }
 
   /**
-   * Duplicated logic for points/rebounds/assists (for now).
+   * Duplicated logic for points/rebounds/assists/etc. (for now).
    * @param playerStatsLog
    * @param value
    */
@@ -79,26 +79,45 @@ export class App implements OnDestroy {
   }
 
   /**
-   * Duplicated logic for points/rebounds/assists (for now).
+   * Duplicated logic for points/rebounds/assists/etc. (for now).
    * @param playerStatsLog
    * @param value
    */
-  addRebounds(playerStatsLog: PlayerStatsLog, value: number): void {
+  addOffRebound(playerStatsLog: PlayerStatsLog, value: number): void {
     this.playerStatsLogs.update((playerStagsLogs) => {
       const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
 
       if (log) {
-        log.stats.rebounds = log.stats.rebounds + value;
+        log.stats.offRebounds = log.stats.offRebounds + value;
       }
 
       return [ ... playerStagsLogs ];
     });
 
-    this.pushEventLog(playerStatsLog.player, Action.Rebound);
+    this.pushEventLog(playerStatsLog.player, Action.OffRebound);
   }
 
   /**
-   * Duplicated logic for points/rebounds/assists (for now).
+   * Duplicated logic for points/rebounds/assists/etc. (for now).
+   * @param playerStatsLog
+   * @param value
+   */
+  addDefRebound(playerStatsLog: PlayerStatsLog, value: number): void {
+    this.playerStatsLogs.update((playerStagsLogs) => {
+      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
+
+      if (log) {
+        log.stats.defRebounds = log.stats.defRebounds + value;
+      }
+
+      return [ ... playerStagsLogs ];
+    });
+
+    this.pushEventLog(playerStatsLog.player, Action.DefRebound);
+  }
+
+  /**
+   * Duplicated logic for points/rebounds/assists/etc. (for now).
    * @param playerStatsLog
    * @param value
    */
@@ -114,6 +133,63 @@ export class App implements OnDestroy {
     });
 
     this.pushEventLog(playerStatsLog.player, Action.Assist);
+  }
+
+  /**
+   * Duplicated logic for points/rebounds/assists/etc. (for now).
+   * @param playerStatsLog
+   * @param value
+   */
+  addSteals(playerStatsLog: PlayerStatsLog, value: number): void {
+    this.playerStatsLogs.update((playerStagsLogs) => {
+      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
+
+      if (log) {
+        log.stats.steals = log.stats.steals + value;
+      }
+
+      return [ ... playerStagsLogs ];
+    });
+
+    this.pushEventLog(playerStatsLog.player, Action.Steal);
+  }
+
+  /**
+   * Duplicated logic for points/rebounds/assists/etc. (for now).
+   * @param playerStatsLog
+   * @param value
+   */
+  addBlocks(playerStatsLog: PlayerStatsLog, value: number): void {
+    this.playerStatsLogs.update((playerStagsLogs) => {
+      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
+
+      if (log) {
+        log.stats.blocks = log.stats.blocks + value;
+      }
+
+      return [ ... playerStagsLogs ];
+    });
+
+    this.pushEventLog(playerStatsLog.player, Action.Block);
+  }
+
+  /**
+   * Duplicated logic for points/rebounds/assists/etc. (for now).
+   * @param playerStatsLog
+   * @param value
+   */
+  addTurnovers(playerStatsLog: PlayerStatsLog, value: number): void {
+    this.playerStatsLogs.update((playerStagsLogs) => {
+      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
+
+      if (log) {
+        log.stats.turnovers = log.stats.turnovers + value;
+      }
+
+      return [ ... playerStagsLogs ];
+    });
+
+    this.pushEventLog(playerStatsLog.player, Action.Turnover);
   }
 
   private pushEventLog(player: Player, action: ActionType): void {
@@ -132,8 +208,12 @@ export class App implements OnDestroy {
   private static generatePlayerStatsLog(player: Player): PlayerStatsLog {
     const stats = {
       points: 0,
-      rebounds: 0,
+      offRebounds: 0,
+      defRebounds: 0,
       assists: 0,
+      steals: 0,
+      blocks: 0,
+      turnovers: 0,
     };
 
     return { id: player.id, player, stats };

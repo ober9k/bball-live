@@ -1,5 +1,9 @@
 export type Stats = {
   points: number,
-  rebounds: number,
+  offRebounds: number,
+  defRebounds: number,
   assists: number,
+  steals: number,
+  blocks: number,
+  turnovers: number,
 }
