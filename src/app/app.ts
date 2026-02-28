@@ -2,7 +2,7 @@ import { BoxScoreTable } from '@/components/box-score-table/box-score-table';
 import { mockPlayers } from '@/data/mock/players';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
 import { Player } from '@/types/Player';
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -12,12 +12,46 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css',
   standalone: true,
 })
-export class App {
+export class App implements OnDestroy {
   protected readonly title = signal('bball-live');
 
   playerStatsLogs = signal(mockPlayers
     .map((player) => App.generatePlayerStatsLog(player))
   );
+
+  timerInterval: any = null;
+
+  /**
+   * temp timer logic
+   */
+  remainingSeconds = signal<number>(60);
+
+  startTimer() {
+    if (this.timerInterval) {
+      return;
+    }
+
+    this.timerInterval = setInterval(() => {
+      this.remainingSeconds.update((seconds) => seconds - 1);
+    }, 1000);
+  }
+
+  pauseTimer() {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
+    }
+  }
+
+  resetTimer() {
+    this.pauseTimer();
+    this.remainingSeconds.set(60);
+    this.startTimer();
+  }
+
+  ngOnDestroy() {
+    this.pauseTimer(); // cleanup
+  }
 
   /**
    * Duplicated logic for points/rebounds/assists (for now).
