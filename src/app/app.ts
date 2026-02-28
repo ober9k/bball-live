@@ -18,7 +18,7 @@ import { RouterOutlet } from '@angular/router';
 export class App implements OnDestroy {
   protected readonly title = signal('bball-live');
 
-  private static initialSeconds = 60 * 10; /* 10 minute quarter */
+  private static initialSeconds = 600 * 10; /* 10 minute quarter */
 
   playerStatsLogs = signal(mockPlayers
     .map((player) => App.generatePlayerStatsLog(player))
@@ -40,6 +40,11 @@ export class App implements OnDestroy {
 
     this.timerInterval = setInterval(() => {
       this.remainingSeconds.update((seconds) => seconds - 1);
+
+      // kill the empty timer
+      if (this.remainingSeconds() === 0) {
+        this.pauseTimer();
+      }
     }, 1000);
   }
 
