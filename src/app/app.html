@@ -1,7 +1,44 @@
-<main class="main">
-  <div class="content">
-    <h1>bball-live</h1>
-    <p>experimental live scoring</p>
+<main class="main mx-auto max-w-200">
+  <div class="content p-2">
+    <h1 class="text-xl my-1 p-1 font-medium">
+      bball-live
+    </h1>
+    <p class="p-1">
+      experimental live scoring
+    </p>
+    <h2 class="my-1 mt-2 p-1 font-medium">
+      Box Score
+    </h2>
+    <app-box-score-table [playerStatsLogs]="playerStatsLogs()" />
+    <h2 class="my-1 mt-2 p-1 font-medium">
+      Active Score
+    </h2>
+    <div class="border-1 border-gray-300">
+      <table class="w-full">
+        <thead>
+        <tr class="border-b border-gray-300 bg-gray-200">
+          <th class="w-auto p-1 text-left">&nbsp;</th>
+          <th class="w-auto p-1 text-right">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (playerStatsLog of playerStatsLogs(); track playerStatsLog.id) {
+            <tr class="odd:bg-gray-100">
+              <td class="w-auto p-1">
+                {{ playerStatsLog.player.name }}
+              </td>
+              <td class="w-auto p-1 text-right flex gap-1 justify-end">
+                <button class="border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100" (click)="addPoints(playerStatsLog, 1)">+1 PT</button>
+                <button class="border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100" (click)="addPoints(playerStatsLog, 2)">+2 PTS</button>
+                <button class="border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100" (click)="addPoints(playerStatsLog, 2)">+3 PTS</button>
+                <button class="border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100" (click)="addRebounds(playerStatsLog, 1)">+1 REB</button>
+                <button class="border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100" (click)="addAssists(playerStatsLog, 1)">+1 AST</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 </main>
 
