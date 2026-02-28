@@ -174,5 +174,6 @@ export class App implements OnDestroy {
 
   /* temp to reduce button pollution */
   cssButtonClasses = "border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100";
+  cssTableButtonClasses = "border-1 border-gray-300 rounded-sm bg-white px-1 text-sm leading-4.5 cursor-pointer hover:bg-gray-100";
 
 }
