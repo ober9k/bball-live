@@ -41,9 +41,12 @@
                 {{ playerStatsLog.player.name }}
               </td>
               <td class="w-auto p-1 text-right flex gap-1 justify-end">
-                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 1)">FTM</button>
-                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 2)">2PM</button>
-                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 2)">3PM</button>
+                <button [ngClass]="cssButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 2)">FGM</button>
+                <button [ngClass]="cssButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 2)">FGA</button>
+                <button [ngClass]="cssButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 3)">3PM</button>
+                <button [ngClass]="cssButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 3)">3PA</button>
+                <button [ngClass]="cssButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 1)">FTM</button>
+                <button [ngClass]="cssButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 1)">FTA</button>
                 <button [ngClass]="cssButtonClasses" (click)="dispatchOffReboundEvent(playerStatsLog)">OREB</button>
                 <button [ngClass]="cssButtonClasses" (click)="dispatchDefReboundEvent(playerStatsLog)">DREB</button>
                 <button [ngClass]="cssButtonClasses" (click)="dispatchAssistsEvent(playerStatsLog)">AST</button>

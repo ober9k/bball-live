@@ -3,7 +3,9 @@
     <thead>
     <tr class="border-b border-gray-300 bg-gray-200">
       <th class="w-auto p-1 text-left">&nbsp;</th>
-      <th class="w-12 p-1 text-center">PTS</th>
+      <th class="w-12 p-1 text-center">FG</th>
+      <th class="w-12 p-1 text-center">3PT</th>
+      <th class="w-12 p-1 text-center">FT</th>
       <th class="w-12 p-1 text-center">OREB</th>
       <th class="w-12 p-1 text-center">DREB</th>
       <th class="w-12 p-1 text-center">AST</th>
@@ -18,7 +20,15 @@
           <td class="w-auto p-1">
             {{ playerStatsLog.player.name }}
           </td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.points }}</td>
+          <td class="w-12 p-1 text-center">
+            {{ playerStatsLog.stats.fieldGoalMade_2 }}-{{ playerStatsLog.stats.fieldGoalAttempted_2 }}
+          </td>
+          <td class="w-12 p-1 text-center">
+            {{ playerStatsLog.stats.fieldGoalMade_3 }}-{{ playerStatsLog.stats.fieldGoalAttempted_3 }}
+          </td>
+          <td class="w-12 p-1 text-center">
+            {{ playerStatsLog.stats.fieldGoalMade_1 }}-{{ playerStatsLog.stats.fieldGoalAttempted_1 }}
+          </td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.offRebounds }}</td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.defRebounds }}</td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.assists }}</td>
@@ -31,7 +41,15 @@
     <tfoot>
     <tr class="border-t border-gray-200">
       <th class="w-auto p-1 text-left">Totals</th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals().points }}</th>
+      <th class="w-12 p-1 text-center">
+        {{ playerStatsTotals().fieldGoalMade_2 }}-{{ playerStatsTotals().fieldGoalAttempted_2 }}
+      </th>
+      <th class="w-12 p-1 text-center">
+        {{ playerStatsTotals().fieldGoalMade_3 }}-{{ playerStatsTotals().fieldGoalAttempted_3 }}
+      </th>
+      <th class="w-12 p-1 text-center">
+        {{ playerStatsTotals().fieldGoalMade_1 }}-{{ playerStatsTotals().fieldGoalAttempted_1 }}
+      </th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().offRebounds }}</th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().defRebounds }}</th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().assists }}</th>

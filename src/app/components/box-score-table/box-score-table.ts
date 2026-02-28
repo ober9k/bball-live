@@ -14,7 +14,12 @@ export class BoxScoreTable {
     return this.playerStatsLogs()
       .reduce((acc, log) => {
         return {
-          points: acc.points + log.stats.points,
+          fieldGoalMade_1: acc.fieldGoalMade_1 + log.stats.fieldGoalMade_1,
+          fieldGoalAttempted_1: acc.fieldGoalAttempted_1 + log.stats.fieldGoalAttempted_1,
+          fieldGoalMade_2: acc.fieldGoalMade_2 + log.stats.fieldGoalMade_2,
+          fieldGoalAttempted_2: acc.fieldGoalAttempted_2 + log.stats.fieldGoalAttempted_2,
+          fieldGoalMade_3: acc.fieldGoalMade_3 + log.stats.fieldGoalMade_3,
+          fieldGoalAttempted_3: acc.fieldGoalAttempted_3 + log.stats.fieldGoalAttempted_3,
           offRebounds: acc.offRebounds + log.stats.offRebounds,
           defRebounds: acc.defRebounds + log.stats.defRebounds,
           assists: acc.assists + log.stats.assists,
@@ -23,7 +28,12 @@ export class BoxScoreTable {
           turnovers: acc.turnovers + log.stats.turnovers,
         };
       }, {
-        points: 0,
+        fieldGoalMade_1: 0,
+        fieldGoalAttempted_1: 0,
+        fieldGoalMade_2: 0,
+        fieldGoalAttempted_2: 0,
+        fieldGoalMade_3: 0,
+        fieldGoalAttempted_3: 0,
         offRebounds: 0,
         defRebounds: 0,
         assists: 0,

@@ -7,9 +7,12 @@ export class StatsUtils {
    * Map of handled player actions.
    */
   static playerActionMap = new Map()
-    .set(Action.Point_1, "points")
-    .set(Action.Point_2, "points")
-    .set(Action.Point_3, "points")
+    .set(Action.FieldGoalMade_1, "fieldGoalMade_1")
+    .set(Action.FieldGoalAttempted_1, "fieldGoalAttempted_1")
+    .set(Action.FieldGoalMade_2, "fieldGoalMade_2")
+    .set(Action.FieldGoalAttempted_2, "fieldGoalAttempted_2")
+    .set(Action.FieldGoalMade_3, "fieldGoalMade_3")
+    .set(Action.FieldGoalAttempted_3, "fieldGoalAttempted_3")
     .set(Action.OffRebound, "offRebounds")
     .set(Action.DefRebound, "defRebounds")
     .set(Action.Assist, "assists")
@@ -23,20 +26,21 @@ export class StatsUtils {
    * @param stats
    */
   static applyAction(action: ActionType, stats: Stats): void {
-    /* for now, separately handle points until ftm/a, fgm/a, 3pm/a applied */
+    /* handle extra logic for attempted when made show */
     switch (action) {
-      case Action.Point_1:
-        stats.points += 1;
+      case Action.FieldGoalMade_1:
+        stats.fieldGoalAttempted_1 += 1;
         break;
-      case Action.Point_2:
-        stats.points += 2;
+      case Action.FieldGoalMade_2:
+        stats.fieldGoalAttempted_2 += 1;
         break;
-      case Action.Point_3:
-        stats.points += 3;
+      case Action.FieldGoalMade_3:
+        stats.fieldGoalAttempted_3 += 1;
         break;
-      default:
-        stats[StatsUtils.playerActionMap.get(action)] += 1;
     }
+
+    /* work through default handling */
+    stats[StatsUtils.playerActionMap.get(action)] += 1;
   }
 
 }

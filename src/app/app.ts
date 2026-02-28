@@ -84,13 +84,12 @@ export class App implements OnDestroy {
     this.pushEventLog(player, action);
   }
 
-  /**
-   * Duplicated logic for points/rebounds/assists/etc. (for now).
-   * @param playerStatsLog
-   * @param value
-   */
-  addPoints(playerStatsLog: PlayerStatsLog, value: number): void {
-    this.pushEventLog(playerStatsLog.player, App.getPointActionType(value));
+  dispatchFieldGoalMadeEvent({ player }: PlayerStatsLog, value: number): void {
+    this.dispatchEvent(player, App.getFieldGoalMadeAction(value));
+  }
+
+  dispatchFieldGoalAttemptedEvent({ player }: PlayerStatsLog, value: number): void {
+    this.dispatchEvent(player, App.getFieldGoalAttemptedAction(value));
   }
 
   dispatchOffReboundEvent({ player }: PlayerStatsLog): void {
@@ -132,7 +131,12 @@ export class App implements OnDestroy {
   /* this can be in a util function later */
   private static generatePlayerStatsLog(player: Player): PlayerStatsLog {
     const stats = {
-      points: 0,
+      fieldGoalMade_1: 0,
+      fieldGoalAttempted_1: 0,
+      fieldGoalMade_2: 0,
+      fieldGoalAttempted_2: 0,
+      fieldGoalMade_3: 0,
+      fieldGoalAttempted_3: 0,
       offRebounds: 0,
       defRebounds: 0,
       assists: 0,
@@ -145,18 +149,26 @@ export class App implements OnDestroy {
   }
 
   /**
-   * This may end up redundant when made/attempted logic is applied.
    * @param value
    * @private
    */
-  private static getPointActionType(value: number): ActionType {
+  private static getFieldGoalMadeAction(value: number): ActionType {
     switch (value) {
-      case 3:
-        return Action.Point_3;
-      case 2:
-        return Action.Point_2;
-      default:
-        return Action.Point_1;
+      case 3:  return Action.FieldGoalMade_3;
+      case 2:  return Action.FieldGoalMade_2;
+      default: return Action.FieldGoalMade_1;
+    }
+  }
+
+  /**
+   * @param value
+   * @private
+   */
+  private static getFieldGoalAttemptedAction(value: number): ActionType {
+    switch (value) {
+      case 3:  return Action.FieldGoalAttempted_3;
+      case 2:  return Action.FieldGoalAttempted_2;
+      default: return Action.FieldGoalAttempted_1;
     }
   }
 
