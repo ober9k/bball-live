@@ -4,8 +4,9 @@ import { MinutesPipe } from '@/pipes/minutes-pipe';
 import { Action, ActionType, EventLog } from '@/types/logs/EventLog';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
 import { Player } from '@/types/Player';
+import { StatsUtils } from '@/utils/stats.utils';
 import { NgClass } from '@angular/common';
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, computed, OnDestroy, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -18,13 +19,27 @@ import { RouterOutlet } from '@angular/router';
 export class App implements OnDestroy {
   protected readonly title = signal('bball-live');
 
-  private static initialSeconds = 600 * 10; /* 10 minute quarter */
-
-  playerStatsLogs = signal(mockPlayers
-    .map((player) => App.generatePlayerStatsLog(player))
-  );
+  private static initialSeconds = 60 * 10; /* 10 minute quarter */
 
   events = signal<Array<EventLog>>([]);
+
+  currentEventId = computed(() => {
+    return this.events().length + 1;
+  });
+
+  playerStatsLogs = computed(() => {
+    const playerStatsLogs = mockPlayers
+      .map(App.generatePlayerStatsLog);
+
+    this.events().forEach((event) => {
+      const { player, action } = event;
+      const { stats  } = playerStatsLogs.find((log) => log.player.id === player.id)!; /* expect it */
+
+      StatsUtils.applyAction(action, stats);
+    });
+
+    return playerStatsLogs;
+  });
 
   timerInterval: any = null;
 
@@ -65,142 +80,46 @@ export class App implements OnDestroy {
     this.pauseTimer(); // cleanup
   }
 
+  dispatchEvent(player: Player, action: ActionType): void {
+    this.pushEventLog(player, action);
+  }
+
   /**
    * Duplicated logic for points/rebounds/assists/etc. (for now).
    * @param playerStatsLog
    * @param value
    */
   addPoints(playerStatsLog: PlayerStatsLog, value: number): void {
-    this.playerStatsLogs.update((playerStagsLogs) => {
-      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
-
-      if (log) {
-        log.stats.points = log.stats.points + value;
-      }
-
-      return [ ... playerStagsLogs ];
-    });
-
     this.pushEventLog(playerStatsLog.player, App.getPointActionType(value));
   }
 
-  /**
-   * Duplicated logic for points/rebounds/assists/etc. (for now).
-   * @param playerStatsLog
-   * @param value
-   */
-  addOffRebound(playerStatsLog: PlayerStatsLog, value: number): void {
-    this.playerStatsLogs.update((playerStagsLogs) => {
-      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
-
-      if (log) {
-        log.stats.offRebounds = log.stats.offRebounds + value;
-      }
-
-      return [ ... playerStagsLogs ];
-    });
-
-    this.pushEventLog(playerStatsLog.player, Action.OffRebound);
+  dispatchOffReboundEvent({ player }: PlayerStatsLog): void {
+    this.dispatchEvent(player, Action.OffRebound);
   }
 
-  /**
-   * Duplicated logic for points/rebounds/assists/etc. (for now).
-   * @param playerStatsLog
-   * @param value
-   */
-  addDefRebound(playerStatsLog: PlayerStatsLog, value: number): void {
-    this.playerStatsLogs.update((playerStagsLogs) => {
-      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
-
-      if (log) {
-        log.stats.defRebounds = log.stats.defRebounds + value;
-      }
-
-      return [ ... playerStagsLogs ];
-    });
-
-    this.pushEventLog(playerStatsLog.player, Action.DefRebound);
+  dispatchDefReboundEvent({ player }: PlayerStatsLog): void {
+    this.dispatchEvent(player, Action.DefRebound);
   }
 
-  /**
-   * Duplicated logic for points/rebounds/assists/etc. (for now).
-   * @param playerStatsLog
-   * @param value
-   */
-  addAssists(playerStatsLog: PlayerStatsLog, value: number): void {
-    this.playerStatsLogs.update((playerStagsLogs) => {
-      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
-
-      if (log) {
-        log.stats.assists = log.stats.assists + value;
-      }
-
-      return [ ... playerStagsLogs ];
-    });
-
-    this.pushEventLog(playerStatsLog.player, Action.Assist);
+  dispatchAssistsEvent({ player }: PlayerStatsLog): void {
+    this.dispatchEvent(player, Action.Assist);
   }
 
-  /**
-   * Duplicated logic for points/rebounds/assists/etc. (for now).
-   * @param playerStatsLog
-   * @param value
-   */
-  addSteals(playerStatsLog: PlayerStatsLog, value: number): void {
-    this.playerStatsLogs.update((playerStagsLogs) => {
-      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
-
-      if (log) {
-        log.stats.steals = log.stats.steals + value;
-      }
-
-      return [ ... playerStagsLogs ];
-    });
-
-    this.pushEventLog(playerStatsLog.player, Action.Steal);
+  dispatchStealsEvent({ player }: PlayerStatsLog): void {
+    this.dispatchEvent(player, Action.Steal);
   }
 
-  /**
-   * Duplicated logic for points/rebounds/assists/etc. (for now).
-   * @param playerStatsLog
-   * @param value
-   */
-  addBlocks(playerStatsLog: PlayerStatsLog, value: number): void {
-    this.playerStatsLogs.update((playerStagsLogs) => {
-      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
-
-      if (log) {
-        log.stats.blocks = log.stats.blocks + value;
-      }
-
-      return [ ... playerStagsLogs ];
-    });
-
-    this.pushEventLog(playerStatsLog.player, Action.Block);
+  dispatchBlocksEvent({ player }: PlayerStatsLog): void {
+    this.dispatchEvent(player, Action.Block);
   }
 
-  /**
-   * Duplicated logic for points/rebounds/assists/etc. (for now).
-   * @param playerStatsLog
-   * @param value
-   */
-  addTurnovers(playerStatsLog: PlayerStatsLog, value: number): void {
-    this.playerStatsLogs.update((playerStagsLogs) => {
-      const log = playerStagsLogs.find((log) => log.id === playerStatsLog.id);
-
-      if (log) {
-        log.stats.turnovers = log.stats.turnovers + value;
-      }
-
-      return [ ... playerStagsLogs ];
-    });
-
-    this.pushEventLog(playerStatsLog.player, Action.Turnover);
+  dispatchTurnoversEvent({ player }: PlayerStatsLog): void {
+    this.dispatchEvent(player, Action.Turnover);
   }
 
   private pushEventLog(player: Player, action: ActionType): void {
     const eventLog = {
-      id: this.events().length,
+      id: this.currentEventId(),
       player, action,
       seconds: this.remainingSeconds(),
     };
