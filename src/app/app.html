@@ -31,12 +31,9 @@
         <thead>
         <tr class="border-b border-gray-300 bg-gray-200">
           <th class="w-auto px-1 py-1.5 text-left">&nbsp;</th>
-          <th class="w-10 px-1 py-1.5 text-xs text-center">FGM</th>
-          <th class="w-10 px-1 py-1.5 text-xs text-center">FGA</th>
-          <th class="w-10 px-1 py-1.5 text-xs text-center">3PM</th>
-          <th class="w-10 px-1 py-1.5 text-xs text-center">3PA</th>
-          <th class="w-10 px-1 py-1.5 text-xs text-center">FTM</th>
-          <th class="w-10 px-1 py-1.5 text-xs text-center">FTA</th>
+          <th class="w-16 px-1 py-1.5 text-xs text-center">FGM-A</th>
+          <th class="w-16 px-1 py-1.5 text-xs text-center">3PM-A</th>
+          <th class="w-16 px-1 py-1.5 text-xs text-center">FTM-A</th>
           <th class="w-10 px-1 py-1.5 text-xs text-center">OREB</th>
           <th class="w-10 px-1 py-1.5 text-xs text-center">DREB</th>
           <th class="w-10 px-1 py-1.5 text-xs text-center">REB</th>
@@ -53,12 +50,27 @@
               <td class="w-auto px-2 py-1.5 text-xs">
                 {{ playerStatsLog.player.name }}
               </td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 2)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 2)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 3)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 3)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 1)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 1)">+</button></td>
+              <td class="w-16 px-1 py-0.5 text-xs text-center">
+                <div class="flex gap-0.5 justify-center">
+                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 2)">+</button>
+                  -
+                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 2)">+</button>
+                </div>
+              </td>
+              <td class="w-16 px-1 py-0.5 text-xs text-center">
+                <div class="flex gap-0.5 justify-center">
+                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 3)">+</button>
+                  -
+                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 3)">+</button>
+                </div>
+              </td>
+              <td class="w-16 px-1 py-0.5 text-xs text-center">
+                <div class="flex gap-0.5 justify-center">
+                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 1)">+</button>
+                  -
+                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 1)">+</button>
+                </div>
+              </td>
               <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchOffReboundEvent(playerStatsLog)">+</button></td>
               <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchDefReboundEvent(playerStatsLog)">+</button></td>
               <td class="w-10 px-1 py-0.5 text-xs text-center">---</td>
