@@ -41,11 +41,11 @@
                 {{ playerStatsLog.player.name }}
               </td>
               <td class="w-auto p-1 text-right flex gap-1 justify-end">
-                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 1)">+1 PT</button>
-                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 2)">+2 PTS</button>
-                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 2)">+3 PTS</button>
-                <button [ngClass]="cssButtonClasses" (click)="addRebounds(playerStatsLog, 1)">+1 REB</button>
-                <button [ngClass]="cssButtonClasses" (click)="addAssists(playerStatsLog, 1)">+1 AST</button>
+                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 1)">FTM</button>
+                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 2)">2PM</button>
+                <button [ngClass]="cssButtonClasses" (click)="addPoints(playerStatsLog, 2)">3PM</button>
+                <button [ngClass]="cssButtonClasses" (click)="addRebounds(playerStatsLog, 1)">REB</button>
+                <button [ngClass]="cssButtonClasses" (click)="addAssists(playerStatsLog, 1)">AST</button>
               </td>
             </tr>
           }
