@@ -3,12 +3,13 @@ import { mockPlayers } from '@/data/mock/players';
 import { Action, ActionType, EventLog } from '@/types/logs/EventLog';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
 import { Player } from '@/types/Player';
+import { NgClass } from '@angular/common';
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BoxScoreTable],
+  imports: [RouterOutlet, BoxScoreTable, NgClass],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,
@@ -153,5 +154,8 @@ export class App implements OnDestroy {
         return Action.Point_1;
     }
   }
+
+  /* temp to reduce button pollution */
+  cssButtonClasses = "border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100";
 
 }
