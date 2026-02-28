@@ -65,7 +65,7 @@
           event:<br/>
           &nbsp;&nbsp;player: {{ event.player.name }};
           &nbsp;&nbsp;action: {{ event.action }};
-          &nbsp;&nbsp;seconds: {{ event.seconds }}
+          &nbsp;&nbsp;seconds: {{ event.seconds | minutes }}
         </div>
       } @empty {
         <p class="p-1">

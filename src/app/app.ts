@@ -1,5 +1,6 @@
 import { BoxScoreTable } from '@/components/box-score-table/box-score-table';
 import { mockPlayers } from '@/data/mock/players';
+import { MinutesPipe } from '@/pipes/minutes-pipe';
 import { Action, ActionType, EventLog } from '@/types/logs/EventLog';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
 import { Player } from '@/types/Player';
@@ -9,7 +10,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BoxScoreTable, NgClass],
+  imports: [RouterOutlet, BoxScoreTable, NgClass, MinutesPipe],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,
