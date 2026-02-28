@@ -1,5 +1,6 @@
 import { BoxScoreTable } from '@/components/box-score-table/box-score-table';
 import { mockPlayers } from '@/data/mock/players';
+import { Action, ActionType, EventLog } from '@/types/logs/EventLog';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
 import { Player } from '@/types/Player';
 import { Component, OnDestroy, signal } from '@angular/core';
@@ -18,6 +19,8 @@ export class App implements OnDestroy {
   playerStatsLogs = signal(mockPlayers
     .map((player) => App.generatePlayerStatsLog(player))
   );
+
+  events = signal<Array<EventLog>>([]);
 
   timerInterval: any = null;
 
@@ -68,6 +71,30 @@ export class App implements OnDestroy {
 
       return [ ... playerStagsLogs ];
     });
+
+    let action: ActionType;
+
+    switch (value) {
+      case 3:
+        action = Action.Point_3;
+        break;
+      case 2:
+        action = Action.Point_2;
+        break
+      case 1:
+      default:
+        action = Action.Point_1;
+        break;
+    }
+
+    this.events.update((events) => [
+      ...events, {
+        id: events.length + 1,
+        player: playerStatsLog.player,
+        action: action,
+        seconds: this.remainingSeconds(),
+      }
+    ]);
   }
 
   /**
@@ -85,6 +112,15 @@ export class App implements OnDestroy {
 
       return [ ... playerStagsLogs ];
     });
+
+    this.events.update((events) => [
+      ...events, {
+        id: events.length + 1,
+        player: playerStatsLog.player,
+        action: Action.Rebound,
+        seconds: this.remainingSeconds(),
+      }
+    ]);
   }
 
   /**
@@ -102,6 +138,15 @@ export class App implements OnDestroy {
 
       return [ ... playerStagsLogs ];
     });
+
+    this.events.update((events) => [
+      ...events, {
+        id: events.length + 1,
+        player: playerStatsLog.player,
+        action: Action.Assist,
+        seconds: this.remainingSeconds(),
+      }
+    ]);
   }
 
   /* this can be in a util function later */

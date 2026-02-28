@@ -52,6 +52,23 @@
         </tbody>
       </table>
     </div>
+    <h2 class="my-1 mt-2 p-1 font-medium">
+      Active Events
+    </h2>
+    <div>
+      @for (event of events(); track event.id) {
+        <div>
+          event:<br/>
+          &nbsp;&nbsp;player: {{ event.player.name }};
+          &nbsp;&nbsp;action: {{ event.action }};
+          &nbsp;&nbsp;seconds: {{ event.seconds }}
+        </div>
+      } @empty {
+        <p class="p-1">
+          no events yet...
+        </p>
+      }
+    </div>
   </div>
 </main>
 
