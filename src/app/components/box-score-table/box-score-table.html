@@ -8,10 +8,12 @@
       <th class="w-12 p-1 text-center">FT</th>
       <th class="w-12 p-1 text-center">OREB</th>
       <th class="w-12 p-1 text-center">DREB</th>
+      <th class="w-12 p-1 text-center">REB</th>
       <th class="w-12 p-1 text-center">AST</th>
       <th class="w-12 p-1 text-center">STL</th>
       <th class="w-12 p-1 text-center">BLK</th>
       <th class="w-12 p-1 text-center">TO</th>
+      <th class="w-12 p-1 text-center">PTS</th>
     </tr>
     </thead>
     <tbody>
@@ -31,10 +33,12 @@
           </td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.offRebounds }}</td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.defRebounds }}</td>
+          <td class="w-12 p-1 text-center">---</td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.assists }}</td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.steals }}</td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.blocks }}</td>
           <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.turnovers }}</td>
+          <td class="w-12 p-1 text-center">---</td>
         </tr>
       }
     </tbody>
@@ -52,10 +56,12 @@
       </th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().offRebounds }}</th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().defRebounds }}</th>
+      <th class="w-12 p-1 text-center">---</th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().assists }}</th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().steals }}</th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().blocks }}</th>
       <th class="w-12 p-1 text-center">{{ playerStatsTotals().turnovers }}</th>
+      <th class="w-12 p-1 text-center">---</th>
     </tr>
     </tfoot>
   </table>
