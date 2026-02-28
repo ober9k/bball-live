@@ -2,66 +2,66 @@
   <table class="w-full">
     <thead>
     <tr class="border-b border-gray-300 bg-gray-200">
-      <th class="w-auto p-1 text-left">&nbsp;</th>
-      <th class="w-12 p-1 text-center">FG</th>
-      <th class="w-12 p-1 text-center">3PT</th>
-      <th class="w-12 p-1 text-center">FT</th>
-      <th class="w-12 p-1 text-center">OREB</th>
-      <th class="w-12 p-1 text-center">DREB</th>
-      <th class="w-12 p-1 text-center">REB</th>
-      <th class="w-12 p-1 text-center">AST</th>
-      <th class="w-12 p-1 text-center">STL</th>
-      <th class="w-12 p-1 text-center">BLK</th>
-      <th class="w-12 p-1 text-center">TO</th>
-      <th class="w-12 p-1 text-center">PTS</th>
+      <th class="w-auto px-1 py-1.5 text-left">&nbsp;</th>
+      <th class="w-14 px-1 py-1.5 text-xs text-center">FGM-A</th>
+      <th class="w-14 px-1 py-1.5 text-xs text-center">3PM-A</th>
+      <th class="w-14 px-1 py-1.5 text-xs text-center">FTM-A</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">OREB</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">DREB</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">REB</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">AST</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">STL</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">BLK</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">TO</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">PTS</th>
     </tr>
     </thead>
     <tbody>
       @for (playerStatsLog of playerStatsLogs(); track playerStatsLog.id) {
         <tr class="odd:bg-gray-100">
-          <td class="w-auto p-1">
+          <td class="w-auto px-2 py-1.5 text-xs">
             {{ playerStatsLog.player.name }}
           </td>
-          <td class="w-12 p-1 text-center">
+          <td class="w-14 px-1 py-1.5 text-xs text-center">
             {{ playerStatsLog.stats.fieldGoalMade_2 }}-{{ playerStatsLog.stats.fieldGoalAttempted_2 }}
           </td>
-          <td class="w-12 p-1 text-center">
+          <td class="w-14 px-1 py-1.5 text-xs text-center">
             {{ playerStatsLog.stats.fieldGoalMade_3 }}-{{ playerStatsLog.stats.fieldGoalAttempted_3 }}
           </td>
-          <td class="w-12 p-1 text-center">
+          <td class="w-14 px-1 py-1.5 text-xs text-center">
             {{ playerStatsLog.stats.fieldGoalMade_1 }}-{{ playerStatsLog.stats.fieldGoalAttempted_1 }}
           </td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.offRebounds }}</td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.defRebounds }}</td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats | rebounds }}</td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.assists }}</td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.steals }}</td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.blocks }}</td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats.turnovers }}</td>
-          <td class="w-12 p-1 text-center">{{ playerStatsLog.stats | points }}</td>
+          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.offRebounds }}</td>
+          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.defRebounds }}</td>
+          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats | rebounds }}</td>
+          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.assists }}</td>
+          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.steals }}</td>
+          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.blocks }}</td>
+          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.turnovers }}</td>
+          <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats | points }}</th>
         </tr>
       }
     </tbody>
     <tfoot>
     <tr class="border-t border-gray-200">
-      <th class="w-auto p-1 text-left">Totals</th>
-      <th class="w-12 p-1 text-center">
+      <th class="w-auto px-2 py-1.5 text-left text-xs">Totals</th>
+      <th class="w-14 px-1 py-1.5 text-xs text-center">
         {{ playerStatsTotals().fieldGoalMade_2 }}-{{ playerStatsTotals().fieldGoalAttempted_2 }}
       </th>
-      <th class="w-12 p-1 text-center">
+      <th class="w-14 px-1 py-1.5 text-xs text-center">
         {{ playerStatsTotals().fieldGoalMade_3 }}-{{ playerStatsTotals().fieldGoalAttempted_3 }}
       </th>
-      <th class="w-12 p-1 text-center">
+      <th class="w-14 px-1 py-1.5 text-xs text-center">
         {{ playerStatsTotals().fieldGoalMade_1 }}-{{ playerStatsTotals().fieldGoalAttempted_1 }}
       </th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals().offRebounds }}</th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals().defRebounds }}</th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals() | rebounds }}</th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals().assists }}</th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals().steals }}</th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals().blocks }}</th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals().turnovers }}</th>
-      <th class="w-12 p-1 text-center">{{ playerStatsTotals() | points }}</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().offRebounds }}</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().defRebounds }}</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals() | rebounds }}</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().assists }}</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().steals }}</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().blocks }}</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().turnovers }}</th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals() | points }}</th>
     </tr>
     </tfoot>
   </table>
