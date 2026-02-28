@@ -89,14 +89,7 @@ export class App implements OnDestroy {
         break;
     }
 
-    this.events.update((events) => [
-      ...events, {
-        id: events.length + 1,
-        player: playerStatsLog.player,
-        action: action,
-        seconds: this.remainingSeconds(),
-      }
-    ]);
+    this.pushEventLog(playerStatsLog.player, action);
   }
 
   /**
@@ -115,14 +108,7 @@ export class App implements OnDestroy {
       return [ ... playerStagsLogs ];
     });
 
-    this.events.update((events) => [
-      ...events, {
-        id: events.length + 1,
-        player: playerStatsLog.player,
-        action: Action.Rebound,
-        seconds: this.remainingSeconds(),
-      }
-    ]);
+    this.pushEventLog(playerStatsLog.player, Action.Rebound);
   }
 
   /**
@@ -141,13 +127,18 @@ export class App implements OnDestroy {
       return [ ... playerStagsLogs ];
     });
 
+    this.pushEventLog(playerStatsLog.player, Action.Assist);
+  }
+
+  private pushEventLog(player: Player, action: ActionType): void {
+    const eventLog = {
+      id: this.events().length,
+      player, action,
+      seconds: this.remainingSeconds(),
+    };
+
     this.events.update((events) => [
-      ...events, {
-        id: events.length + 1,
-        player: playerStatsLog.player,
-        action: Action.Assist,
-        seconds: this.remainingSeconds(),
-      }
+      ...events, eventLog,
     ]);
   }
 
