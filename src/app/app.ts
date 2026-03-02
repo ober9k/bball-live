@@ -32,14 +32,26 @@ export class App implements OnDestroy {
       .map(App.generatePlayerStatsLog);
 
     this.events().forEach((event) => {
-      const { player, action } = event;
-      const { stats  } = playerStatsLogs.find((log) => log.player.id === player.id)!; /* expect it */
+      const { player, secondaryPlayer, action } = event;
+      const { stats } = playerStatsLogs.find((log) => log.player.id === player.id)!; /* expect it */
 
       StatsUtils.applyAction(action, stats);
+
+      /* need generic handling */
+      if (secondaryPlayer) {
+        const { stats } = playerStatsLogs.find((log) => log.player.id === secondaryPlayer.id)! /* expect it */
+        StatsUtils.applyAction(Action.Assist, stats); /* apply secondary stat for the assist */
+      }
     });
 
     return playerStatsLogs;
   });
+
+  /* temp logic */
+  getAssistedBy({ id }: Player): Array<Player> {
+    return mockPlayers
+      .filter((player) => player.id !== id);
+  }
 
   timerInterval: any = null;
 
@@ -116,6 +128,11 @@ export class App implements OnDestroy {
     this.dispatchEvent(player, Action.Turnover);
   }
 
+  dispatchMadeShotUpdateEvent(eventLog: EventLog, secondaryPlayer: Player | undefined): void {
+    this.updateEventLog(eventLog, secondaryPlayer);
+
+  }
+
   private pushEventLog(player: Player, action: ActionType): void {
     const eventLog = {
       id: this.currentEventId(),
@@ -126,6 +143,26 @@ export class App implements OnDestroy {
     this.events.update((events) => [
       ...events, eventLog,
     ]);
+  }
+
+  /**
+   * iffy with this logic, todo check for something better once working
+   * @param eventLog
+   * @param secondaryPlayer
+   * @private
+   */
+  private updateEventLog(eventLog: EventLog, secondaryPlayer: Player | undefined): void {
+    this.events.update((events) => {
+      const existingLog = events.find(({ id }) => id === eventLog.id);
+
+      if (existingLog) {
+        existingLog.secondaryPlayer = secondaryPlayer;
+      }
+
+      return [
+        ...events,
+      ]
+    });
   }
 
   /* this can be in a util function later */
@@ -175,5 +212,7 @@ export class App implements OnDestroy {
   /* temp to reduce button pollution */
   cssButtonClasses = "border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100";
   cssTableButtonClasses = "border-1 border-gray-300 rounded-sm bg-white px-1 text-sm leading-4.5 cursor-pointer hover:bg-gray-100";
+
+  protected readonly Action = Action; /* temp, expose in template */
 
 }

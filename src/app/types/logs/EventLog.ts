@@ -19,7 +19,8 @@ export type ActionType = typeof Action[keyof typeof Action];
 
 export type EventLog = {
   id: number,
-  player: Player,
   action: ActionType,
+  player: Player,
+  secondaryPlayer?: Player | undefined, /* secondary player tied to the event */
   seconds: number,
 }
