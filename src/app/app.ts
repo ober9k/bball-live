@@ -1,4 +1,5 @@
 import { BoxScoreTable } from '@/components/box-score-table/box-score-table';
+import { PlayByPlayRow } from '@/components/play-by-play/play-by-play-row/play-by-play-row';
 import { mockPlayers } from '@/data/mock/players';
 import { MinutesPipe } from '@/pipes/minutes-pipe';
 import { Action, ActionType, EventLog } from '@/types/logs/EventLog';
@@ -11,7 +12,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BoxScoreTable, NgClass, MinutesPipe],
+  imports: [RouterOutlet, BoxScoreTable, NgClass, MinutesPipe, PlayByPlayRow],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,
@@ -161,7 +162,7 @@ export class App implements OnDestroy {
 
       return [
         ...events,
-      ]
+      ];
     });
   }
 
@@ -212,6 +213,19 @@ export class App implements OnDestroy {
   /* temp to reduce button pollution */
   cssButtonClasses = "border-1 border-gray-300 rounded-sm bg-white px-1 text-sm cursor-pointer hover:bg-gray-100";
   cssTableButtonClasses = "border-1 border-gray-300 rounded-sm bg-white px-1 text-sm leading-4.5 cursor-pointer hover:bg-gray-100";
+
+  /**
+   * This is expensive... OPTIMIZE IT... thx
+   * @param eventLog
+   * @param secondaryPlayer
+   */
+  getSelectedCssTableButtonClasses(eventLog: EventLog, secondaryPlayer: Player): string {
+    console.log("getSCTBC", eventLog.secondaryPlayer === secondaryPlayer);
+
+    return (eventLog.secondaryPlayer === secondaryPlayer)
+      ? this.cssTableButtonClasses + " bg-blue-100!"
+      : this.cssTableButtonClasses;
+  }
 
   protected readonly Action = Action; /* temp, expose in template */
 

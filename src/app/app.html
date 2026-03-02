@@ -90,24 +90,16 @@
     <div>
       @for (event of events(); track event.id) {
         <div>
-          event:<br/>
-          &nbsp;&nbsp;player: {{ event.player.name }};
-          &nbsp;&nbsp;action: {{ event.action }};
-          &nbsp;&nbsp;seconds: {{ event.seconds | minutes }}
+          <app-play-by-play-row [eventLog]="event" />
           @if (event.action === Action.FieldGoalMade_2 || event.action === Action.FieldGoalMade_3) {
-            <div>
+            <div class="flex gap-1 p-1 px-2">
               Assisted by:
-              <div>
-                player: {{ event.secondaryPlayer?.name || "Unassisted" }}
-              </div>
-              <div class="flex gap-1 p-1 px-2">
-                <button [ngClass]="cssTableButtonClasses" (click)="dispatchMadeShotUpdateEvent(event, undefined)">Unassisted</button>
-                @for (player of getAssistedBy(event.player); track player.id) {
-                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchMadeShotUpdateEvent(event, player)">
-                    {{ player.name }}
-                  </button>
-                }
-              </div>
+              <button [ngClass]="getSelectedCssTableButtonClasses(event, undefined)" (click)="dispatchMadeShotUpdateEvent(event, undefined)">Unassisted</button>
+              @for (player of getAssistedBy(event.player); track player.id) {
+                <button [ngClass]="getSelectedCssTableButtonClasses(event, player)" (click)="dispatchMadeShotUpdateEvent(event, player)">
+                  {{ player.name }}
+                </button>
+              }
             </div>
           }
         </div>
