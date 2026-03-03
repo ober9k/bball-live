@@ -20,7 +20,7 @@
       @for (playerStatsLog of playerStatsLogs(); track playerStatsLog.id) {
         <tr class="odd:bg-gray-100">
           <td class="w-auto px-2 py-1.5 text-xs">
-            {{ playerStatsLog.player.name }}
+            <app-player-name [player]="playerStatsLog.player" [active]="playerStatsLog.active" />
           </td>
           <td class="w-14 px-1 py-1.5 text-xs text-center">
             {{ playerStatsLog.stats.fieldGoalMade_2 }}-{{ playerStatsLog.stats.fieldGoalAttempted_2 }}

@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.player {
+  .name {
+    @apply text-xs/6;
+  }
+
+  .status {
+    @apply absolute;
+    @apply px-1;
+    @apply text-lg/6 text-green-600;
+  }
+}
