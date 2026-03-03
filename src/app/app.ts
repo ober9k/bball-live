@@ -206,7 +206,7 @@ export class App implements OnDestroy {
       turnovers: 0,
     };
 
-    return { id: player.id, player, stats };
+    return { id: player.id, player, stats, active: true, };
   }
 
   /**
