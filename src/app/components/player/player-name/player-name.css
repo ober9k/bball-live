@@ -2,12 +2,12 @@
 
 .player {
   .name {
-    @apply text-xs/6;
+    @apply text-xs/4;
   }
 
   .status {
     @apply absolute;
     @apply px-1;
-    @apply text-lg/6 text-green-600;
+    @apply text-lg/4 text-green-600;
   }
 }
