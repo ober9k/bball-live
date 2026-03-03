@@ -2,12 +2,13 @@ import { BoxScoreTable } from '@/components/box-score-table/box-score-table';
 import { PlayByPlayRow } from '@/components/play-by-play/play-by-play-row/play-by-play-row';
 import { mockPlayers } from '@/data/mock/players';
 import { MinutesPipe } from '@/pipes/minutes-pipe';
+import { EventLogService } from '@/services/event-log.service';
 import { Action, ActionType, EventLog } from '@/types/logs/EventLog';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
 import { Player } from '@/types/Player';
 import { StatsUtils } from '@/utils/stats.utils';
 import { NgClass } from '@angular/common';
-import { Component, computed, OnDestroy, signal } from '@angular/core';
+import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -20,16 +21,14 @@ import { RouterOutlet } from '@angular/router';
 export class App implements OnDestroy {
   protected readonly title = signal('bball-live');
 
+  protected eventLogService = inject(EventLogService);
+
   private static initialSeconds = 60 * 10; /* 10 minute quarter */
 
-  events = signal<Array<EventLog>>([]);
+  events = this.eventLogService.eventLogs; /* copy... todo, readonly */
   activeEvents = computed(() => {
     return this.events()
       .filter((event) => event.active);
-  });
-
-  currentEventId = computed(() => {
-    return this.events().length + 1;
   });
 
   playerStatsLogs = computed(() => {
@@ -139,34 +138,16 @@ export class App implements OnDestroy {
 
   dispatchMadeShotUpdateEvent(eventLog: EventLog, secondaryPlayer: Player | undefined): void {
     this.updateEventLog(eventLog, secondaryPlayer);
-
   }
 
   dispatchDeleteEvent(eventLog: EventLog): void {
-    this.events.update((events) => {
-      const existingLog = events.find(({ id }) => id === eventLog.id);
-
-      if (existingLog) {
-        existingLog.active = false;
-      }
-
-      return [
-        ...events,
-      ];
-    });
+    this.eventLogService.deleteEventLog(eventLog);
   }
 
   private pushEventLog(player: Player, action: ActionType): void {
-    const eventLog = {
-      id: this.currentEventId(),
-      player, action,
-      seconds: this.remainingSeconds(),
-      active: true,
-    };
-
-    this.events.update((events) => [
-      ...events, eventLog,
-    ]);
+    this.eventLogService.pushEventLog(
+      action, player, this.remainingSeconds(),
+    );
   }
 
   /**
