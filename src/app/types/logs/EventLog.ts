@@ -23,4 +23,5 @@ export type EventLog = {
   player: Player,
   secondaryPlayer?: Player | undefined, /* secondary player tied to the event */
   seconds: number,
+  active: boolean,
 }

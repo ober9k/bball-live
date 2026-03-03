@@ -23,6 +23,10 @@ export class App implements OnDestroy {
   private static initialSeconds = 60 * 10; /* 10 minute quarter */
 
   events = signal<Array<EventLog>>([]);
+  activeEvents = computed(() => {
+    return this.events()
+      .filter((event) => event.active);
+  });
 
   currentEventId = computed(() => {
     return this.events().length + 1;
@@ -33,6 +37,10 @@ export class App implements OnDestroy {
       .map(App.generatePlayerStatsLog);
 
     this.events().forEach((event) => {
+      if (event.active === false) {
+        return; /* ignore event */
+      }
+
       const { player, secondaryPlayer, action } = event;
       const { stats } = playerStatsLogs.find((log) => log.player.id === player.id)!; /* expect it */
 
@@ -134,11 +142,26 @@ export class App implements OnDestroy {
 
   }
 
+  dispatchDeleteEvent(eventLog: EventLog): void {
+    this.events.update((events) => {
+      const existingLog = events.find(({ id }) => id === eventLog.id);
+
+      if (existingLog) {
+        existingLog.active = false;
+      }
+
+      return [
+        ...events,
+      ];
+    });
+  }
+
   private pushEventLog(player: Player, action: ActionType): void {
     const eventLog = {
       id: this.currentEventId(),
       player, action,
       seconds: this.remainingSeconds(),
+      active: true,
     };
 
     this.events.update((events) => [

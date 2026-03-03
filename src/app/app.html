@@ -88,7 +88,7 @@
       Active Events
     </h2>
     <div>
-      @for (event of events(); track event.id) {
+      @for (event of activeEvents(); track event.id) {
         <div>
           <app-play-by-play-row [eventLog]="event" />
           @if (event.action === Action.FieldGoalMade_2 || event.action === Action.FieldGoalMade_3) {
@@ -102,6 +102,7 @@
               }
             </div>
           }
+          <button [ngClass]="cssTableButtonClasses" (click)="dispatchDeleteEvent(event)">Delete</button>
         </div>
       } @empty {
         <p class="p-1">
