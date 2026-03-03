@@ -51,4 +51,16 @@ export class BoxScoreTable {
       });
   });
 
+  /* temporary... strategy tbd */
+  starterPlayerLogs = computed(() => {
+    return this.playerStatsLogs()
+      .slice(0, 5);
+  });
+
+  /* temporary... strategy tbd */
+  benchPlayerLogs = computed(() => {
+    return this.playerStatsLogs()
+      .slice(5);
+  });
+
 }

@@ -17,33 +17,67 @@
     </tr>
     </thead>
     <tbody>
-      @for (playerStatsLog of playerStatsLogs(); track playerStatsLog.id) {
-        <tr class="odd:bg-gray-100">
-          <td class="w-auto px-2 py-1.5 text-xs">
-            <app-player-name [player]="playerStatsLog.player" [active]="playerStatsLog.active" />
-          </td>
-          <td class="w-14 px-1 py-1.5 text-xs text-center">
-            {{ playerStatsLog.stats.fieldGoalMade_2 }}-{{ playerStatsLog.stats.fieldGoalAttempted_2 }}
-          </td>
-          <td class="w-14 px-1 py-1.5 text-xs text-center">
-            {{ playerStatsLog.stats.fieldGoalMade_3 }}-{{ playerStatsLog.stats.fieldGoalAttempted_3 }}
-          </td>
-          <td class="w-14 px-1 py-1.5 text-xs text-center">
-            {{ playerStatsLog.stats.fieldGoalMade_1 }}-{{ playerStatsLog.stats.fieldGoalAttempted_1 }}
-          </td>
-          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.offRebounds }}</td>
-          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.defRebounds }}</td>
-          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats | rebounds }}</td>
-          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.assists }}</td>
-          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.steals }}</td>
-          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.blocks }}</td>
-          <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.turnovers }}</td>
-          <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats | points }}</th>
-        </tr>
-      }
+    <tr class="border-b border-gray-200">
+      <td colspan="99" class="bg-gray-100 px-2 py-1.5 text-xs">
+        <strong class="font-medium">Starters</strong>
+      </td>
+    </tr>
+    @for (playerStatsLog of starterPlayerLogs(); track playerStatsLog.id) {
+      <tr class="odd:bg-gray-100">
+        <td class="w-auto px-2 py-1.5 text-xs">
+          <app-player-name [player]="playerStatsLog.player" [active]="playerStatsLog.active" />
+        </td>
+        <td class="w-14 px-1 py-1.5 text-xs text-center">
+          {{ playerStatsLog.stats.fieldGoalMade_2 }}-{{ playerStatsLog.stats.fieldGoalAttempted_2 }}
+        </td>
+        <td class="w-14 px-1 py-1.5 text-xs text-center">
+          {{ playerStatsLog.stats.fieldGoalMade_3 }}-{{ playerStatsLog.stats.fieldGoalAttempted_3 }}
+        </td>
+        <td class="w-14 px-1 py-1.5 text-xs text-center">
+          {{ playerStatsLog.stats.fieldGoalMade_1 }}-{{ playerStatsLog.stats.fieldGoalAttempted_1 }}
+        </td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.offRebounds }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.defRebounds }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats | rebounds }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.assists }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.steals }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.blocks }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.turnovers }}</td>
+        <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats | points }}</th>
+      </tr>
+    }
+    <tr class="border-y border-gray-200">
+      <td colspan="99" class="bg-gray-100 px-2 py-1.5 text-xs">
+        <strong class="font-medium">Bench</strong>
+      </td>
+    </tr>
+    @for (playerStatsLog of benchPlayerLogs(); track playerStatsLog.id) {
+      <tr class="odd:bg-gray-100">
+        <td class="w-auto px-2 py-1.5 text-xs">
+          <app-player-name [player]="playerStatsLog.player" [active]="playerStatsLog.active" />
+        </td>
+        <td class="w-14 px-1 py-1.5 text-xs text-center">
+          {{ playerStatsLog.stats.fieldGoalMade_2 }}-{{ playerStatsLog.stats.fieldGoalAttempted_2 }}
+        </td>
+        <td class="w-14 px-1 py-1.5 text-xs text-center">
+          {{ playerStatsLog.stats.fieldGoalMade_3 }}-{{ playerStatsLog.stats.fieldGoalAttempted_3 }}
+        </td>
+        <td class="w-14 px-1 py-1.5 text-xs text-center">
+          {{ playerStatsLog.stats.fieldGoalMade_1 }}-{{ playerStatsLog.stats.fieldGoalAttempted_1 }}
+        </td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.offRebounds }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.defRebounds }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats | rebounds }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.assists }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.steals }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.blocks }}</td>
+        <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.turnovers }}</td>
+        <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats | points }}</th>
+      </tr>
+    }
     </tbody>
     <tfoot>
-    <tr class="border-t border-gray-200">
+    <tr class="border-t border-gray-200 bg-gray-100">
       <th class="w-auto px-2 py-1.5 text-left text-xs">Totals</th>
       <th class="w-14 px-1 py-1.5 text-xs text-center">
         {{ playerStatsTotals().fieldGoalMade_2 }}-{{ playerStatsTotals().fieldGoalAttempted_2 }}
