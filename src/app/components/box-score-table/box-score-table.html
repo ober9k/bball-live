@@ -3,6 +3,7 @@
     <thead>
     <tr class="border-b border-gray-300 bg-gray-200">
       <th class="w-auto px-1 py-1.5 text-left">&nbsp;</th>
+      <th class="w-14 px-1 py-1.5 text-xs text-center">MIN</th>
       <th class="w-14 px-1 py-1.5 text-xs text-center">FGM-A</th>
       <th class="w-14 px-1 py-1.5 text-xs text-center">3PM-A</th>
       <th class="w-14 px-1 py-1.5 text-xs text-center">FTM-A</th>
@@ -26,6 +27,9 @@
       <tr class="odd:bg-gray-100">
         <td class="w-auto px-2 py-1.5 text-xs">
           <app-player-name [player]="playerStatsLog.player" [active]="playerStatsLog.active" />
+        </td>
+        <td class="w-14 px-1 py-1.5 text-xs text-center">
+          {{ playerStatsLog.stats.seconds | minutes }}
         </td>
         <td class="w-14 px-1 py-1.5 text-xs text-center">
           {{ playerStatsLog.stats.fieldGoalMade_2 }}-{{ playerStatsLog.stats.fieldGoalAttempted_2 }}
@@ -55,6 +59,9 @@
       <tr class="odd:bg-gray-100">
         <td class="w-auto px-2 py-1.5 text-xs">
           <app-player-name [player]="playerStatsLog.player" [active]="playerStatsLog.active" />
+        </td>
+        <td class="w-14 px-1 py-1.5 text-xs text-center">
+          {{ playerStatsLog.stats.seconds | minutes }}
         </td>
         <td class="w-14 px-1 py-1.5 text-xs text-center">
           {{ playerStatsLog.stats.fieldGoalMade_2 }}-{{ playerStatsLog.stats.fieldGoalAttempted_2 }}

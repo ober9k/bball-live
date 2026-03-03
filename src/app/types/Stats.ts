@@ -1,4 +1,6 @@
 export type Stats = {
+  /* playing time handling */
+  seconds: number,
   /* ft/fg/3p named to avoid conflicts */
   fieldGoalMade_1: number,
   fieldGoalAttempted_1: number,

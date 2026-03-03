@@ -1,4 +1,5 @@
 import { PlayerName } from '@/components/player/player-name/player-name';
+import { MinutesPipe } from '@/pipes/minutes-pipe';
 import { PointsPipe } from '@/pipes/stats/points-pipe';
 import { ReboundsPipe } from '@/pipes/stats/rebounds-pipe';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
@@ -11,7 +12,8 @@ import { Component, computed, input } from '@angular/core';
   imports: [
     PointsPipe,
     ReboundsPipe,
-    PlayerName
+    PlayerName,
+    MinutesPipe
   ]
 })
 export class BoxScoreTable {
