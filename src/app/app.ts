@@ -244,8 +244,6 @@ export class App implements OnDestroy {
    * @param secondaryPlayer
    */
   getSelectedCssTableButtonClasses(eventLog: EventLog, secondaryPlayer: Player): string {
-    console.log("getSCTBC", eventLog.secondaryPlayer === secondaryPlayer);
-
     return (eventLog.secondaryPlayer === secondaryPlayer)
       ? this.cssTableButtonClasses + " bg-blue-100!"
       : this.cssTableButtonClasses;
