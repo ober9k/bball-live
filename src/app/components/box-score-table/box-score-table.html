@@ -32,13 +32,13 @@
           {{ playerStatsLog.stats.seconds | minutes }}
         </td>
         <td class="w-14 px-1 py-1.5 text-xs text-center">
-          {{ playerStatsLog.stats.fgMade }}-{{ playerStatsLog.stats.fgAttempted }}
+          {{ playerStatsLog.stats | madeAndAttempted: 'fg' }}
         </td>
         <td class="w-14 px-1 py-1.5 text-xs text-center">
-          {{ playerStatsLog.stats.fg3Made }}-{{ playerStatsLog.stats.fg3Attempted }}
+          {{ playerStatsLog.stats | madeAndAttempted: 'fg3' }}
         </td>
         <td class="w-14 px-1 py-1.5 text-xs text-center">
-          {{ playerStatsLog.stats.ftMade }}-{{ playerStatsLog.stats.ftAttempted }}
+          {{ playerStatsLog.stats | madeAndAttempted: 'ft' }}
         </td>
         <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.offRebounds }}</td>
         <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.defRebounds }}</td>
@@ -64,13 +64,13 @@
           {{ playerStatsLog.stats.seconds | minutes }}
         </td>
         <td class="w-14 px-1 py-1.5 text-xs text-center">
-          {{ playerStatsLog.stats.fgMade }}-{{ playerStatsLog.stats.fgAttempted }}
+          {{ playerStatsLog.stats | madeAndAttempted: 'fg' }}
         </td>
         <td class="w-14 px-1 py-1.5 text-xs text-center">
-          {{ playerStatsLog.stats.fg3Made }}-{{ playerStatsLog.stats.fg3Attempted }}
+          {{ playerStatsLog.stats | madeAndAttempted: 'fg3' }}
         </td>
         <td class="w-14 px-1 py-1.5 text-xs text-center">
-          {{ playerStatsLog.stats.ftMade }}-{{ playerStatsLog.stats.ftAttempted }}
+          {{ playerStatsLog.stats | madeAndAttempted: 'ft' }}
         </td>
         <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.offRebounds }}</td>
         <td class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsLog.stats.defRebounds }}</td>
@@ -90,13 +90,13 @@
       </th>
       <th class="w-10 px-1 py-1.5 text-xs text-center">&nbsp;</th>
       <th class="w-14 px-1 py-1.5 text-xs text-center">
-        {{ playerStatsTotals().fgMade }}-{{ playerStatsTotals().fgAttempted }}
+        {{ playerStatsTotals() | madeAndAttempted: 'fg' }}
       </th>
       <th class="w-14 px-1 py-1.5 text-xs text-center">
-        {{ playerStatsTotals().fg3Made }}-{{ playerStatsTotals().fg3Attempted }}
+        {{ playerStatsTotals() | madeAndAttempted: 'fg3' }}
       </th>
       <th class="w-14 px-1 py-1.5 text-xs text-center">
-        {{ playerStatsTotals().ftMade }}-{{ playerStatsTotals().ftAttempted }}
+        {{ playerStatsTotals() | madeAndAttempted: 'ft' }}
       </th>
       <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().offRebounds }}</th>
       <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().defRebounds }}</th>
@@ -106,6 +106,22 @@
       <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().blocks }}</th>
       <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals().turnovers }}</th>
       <th class="w-10 px-1 py-1.5 text-xs text-center">{{ playerStatsTotals() | points }}</th>
+    </tr>
+    <tr class="border-t border-gray-200 bg-gray-100">
+      <th class="w-auto px-2 py-1.5 text-left text-xs">
+        &nbsp;
+      </th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center">&nbsp;</th>
+      <th class="w-14 px-1 py-1.5 text-xs text-center">
+        {{ playerStatsTotals() | madeAndAttemptedPercentage: 'fg' }}
+      </th>
+      <th class="w-14 px-1 py-1.5 text-xs text-center">
+        {{ playerStatsTotals() | madeAndAttemptedPercentage: 'fg3' }}
+      </th>
+      <th class="w-14 px-1 py-1.5 text-xs text-center">
+        {{ playerStatsTotals() | madeAndAttemptedPercentage: 'ft' }}
+      </th>
+      <th class="w-10 px-1 py-1.5 text-xs text-center" colspan="99">&nbsp;</th>
     </tr>
     </tfoot>
   </table>

@@ -1,9 +1,10 @@
 import { PlayerName } from '@/components/player/player-name/player-name';
 import { MinutesPipe } from '@/pipes/minutes-pipe';
+import { MadeAndAttemptedPercentagePipe } from '@/pipes/stats/made-and-attempted-percentage-pipe';
+import { MadeAndAttemptedPipe } from '@/pipes/stats/made-and-attempted-pipe';
 import { PointsPipe } from '@/pipes/stats/points-pipe';
 import { ReboundsPipe } from '@/pipes/stats/rebounds-pipe';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
-import { Stats, StatsKeys } from '@/types/Stats';
 import { StatsUtils } from '@/utils/stats.utils';
 import { Component, computed, input } from '@angular/core';
 
@@ -15,7 +16,9 @@ import { Component, computed, input } from '@angular/core';
     PointsPipe,
     ReboundsPipe,
     PlayerName,
-    MinutesPipe
+    MinutesPipe,
+    MadeAndAttemptedPipe,
+    MadeAndAttemptedPercentagePipe
   ]
 })
 export class BoxScoreTable {
