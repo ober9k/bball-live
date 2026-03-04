@@ -1,7 +1,6 @@
 import { BoxScoreTable } from '@/components/box-score-table/box-score-table';
 import { PlayByPlayRow } from '@/components/play-by-play/play-by-play-row/play-by-play-row';
 import { mockPlayers } from '@/data/mock/players';
-import { MinutesPipe } from '@/pipes/minutes-pipe';
 import { EventLogService } from '@/services/event-log.service';
 import { Action, ActionType, EventLog } from '@/types/logs/EventLog';
 import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
@@ -13,7 +12,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BoxScoreTable, NgClass, MinutesPipe, PlayByPlayRow],
+  imports: [RouterOutlet, BoxScoreTable, NgClass, PlayByPlayRow],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,
@@ -35,6 +34,16 @@ export class App implements OnDestroy {
     const playerStatsLogs = mockPlayers
       .map(StatsUtils.generatePlayerStatsLog);
 
+    /* temp, mark first 5 as starters */
+    playerStatsLogs
+      .slice(0,5)
+      .forEach((log) => {
+        log.active = true;
+      });
+
+    /* start seconds at default initial */
+    let secondsCounter = App.initialSeconds;
+
     this.events().forEach((event) => {
       if (event.active === false) {
         return; /* ignore event */
@@ -50,9 +59,24 @@ export class App implements OnDestroy {
         const { stats } = playerStatsLogs.find((log) => log.player.id === secondaryPlayer.id)! /* expect it */
         StatsUtils.applyAction(Action.Assist, stats); /* apply secondary stat for the assist */
       }
+
+      /* temp logic... just throw the seconds on everyone */
+      playerStatsLogs.forEach((log) => {
+        if (log.active) {
+          log.stats.seconds = log.stats.seconds + (secondsCounter - event.seconds);
+        }
+      })
+
+      /* reset seconds to event timing */
+      secondsCounter = event.seconds;
     });
 
     return playerStatsLogs;
+  });
+
+  players = computed(() => {
+    return this.playerStatsLogs()
+      .map((log) => log.player);
   });
 
   /* temp logic */
