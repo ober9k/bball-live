@@ -33,7 +33,7 @@ export class App implements OnDestroy {
 
   playerStatsLogs = computed(() => {
     const playerStatsLogs = mockPlayers
-      .map(App.generatePlayerStatsLog);
+      .map(StatsUtils.generatePlayerStatsLog);
 
     this.events().forEach((event) => {
       if (event.active === false) {
@@ -168,27 +168,6 @@ export class App implements OnDestroy {
         ...events,
       ];
     });
-  }
-
-  /* this can be in a util function later */
-  private static generatePlayerStatsLog(player: Player): PlayerStatsLog {
-    const stats = {
-      seconds: 0,
-      fgMade: 0,
-      fgAttempted: 0,
-      fg3Made: 0,
-      fg3Attempted: 0,
-      ftMade: 0,
-      ftAttempted: 0,
-      offRebounds: 0,
-      defRebounds: 0,
-      assists: 0,
-      steals: 0,
-      blocks: 0,
-      turnovers: 0,
-    };
-
-    return { id: player.id, player, stats, active: true, };
   }
 
   /**

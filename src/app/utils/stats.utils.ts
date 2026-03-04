@@ -1,5 +1,7 @@
 import { Action, ActionType } from '@/types/logs/EventLog';
-import { Stats } from '@/types/Stats';
+import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
+import { Player } from '@/types/Player';
+import { Stats, StatsKeys } from '@/types/Stats';
 
 export class StatsUtils {
 
@@ -46,6 +48,49 @@ export class StatsUtils {
 
     /* work through default handling */
     stats[StatsUtils.playerActionMap.get(action)] += 1;
+  }
+
+  /**
+   * Generate the empty base log object for a player.
+   * @param player
+   */
+  static generatePlayerStatsLog(player: Player): PlayerStatsLog {
+    const { id } = player;
+    const stats  = StatsUtils.generateEmptyStats();
+    const active = false;
+
+    return { id, player, stats, active };
+  }
+
+  /**
+   * Generate empty stats object used to players and totals.
+   * This is just a shorthand to avoid doing it property-by-property.
+   * (initially used a reducer, but this should be more efficient)
+   */
+  static generateEmptyStats(): Stats {
+    const stats = {} as Stats;
+
+    StatsKeys.forEach((key) => {
+      stats[key] = 0;
+    });
+
+    return stats;
+  }
+
+  /**
+   * Accumulate player stats based on player logs.
+   * (initially used a reducer, but this should be more efficient)
+   * @param acc
+   * @param log
+   */
+  static accumulatePlayerStats(acc: Stats, log: PlayerStatsLog): Stats {
+    const stats = {} as Stats;
+
+    StatsKeys.forEach((key) => {
+      stats[key] = acc[key] + log.stats[key];
+    });
+
+    return stats;
   }
 
 }
