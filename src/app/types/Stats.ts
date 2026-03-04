@@ -13,3 +13,19 @@ export type Stats = {
   blocks: number,
   turnovers: number,
 }
+
+export const StatsKeys = [
+  "seconds",
+  "fgMade",
+  "fgAttempted",
+  "fg3Made",
+  "fg3Attempted",
+  "ftMade",
+  "ftAttempted",
+  "offRebounds",
+  "defRebounds",
+  "assists",
+  "steals",
+  "blocks",
+  "turnovers",
+] as const;
