@@ -45,39 +45,39 @@
         </tr>
         </thead>
         <tbody>
-          @for (playerStatsLog of playerStatsLogs(); track playerStatsLog.id) {
+          @for (player of players(); track player.id) {
             <tr class="odd:bg-gray-100">
               <td class="w-auto px-2 py-1.5 text-xs">
-                {{ playerStatsLog.player.name }}
+                {{ player.name }}
               </td>
               <td class="w-16 px-1 py-0.5 text-xs text-center">
                 <div class="flex gap-0.5 justify-center">
-                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 2)">+</button>
+                  <button [ngClass]="cssTableButtonClasses" (click)="handleFgMade(player)">+</button>
                   -
-                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 2)">+</button>
+                  <button [ngClass]="cssTableButtonClasses" (click)="handleFgAttempted(player)">+</button>
                 </div>
               </td>
               <td class="w-16 px-1 py-0.5 text-xs text-center">
                 <div class="flex gap-0.5 justify-center">
-                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 3)">+</button>
+                  <button [ngClass]="cssTableButtonClasses" (click)="handleFg3Made(player)">+</button>
                   -
-                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 3)">+</button>
+                  <button [ngClass]="cssTableButtonClasses" (click)="handleFg3Attempted(player)">+</button>
                 </div>
               </td>
               <td class="w-16 px-1 py-0.5 text-xs text-center">
                 <div class="flex gap-0.5 justify-center">
-                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalMadeEvent(playerStatsLog, 1)">+</button>
+                  <button [ngClass]="cssTableButtonClasses" (click)="handleFtMade(player)">+</button>
                   -
-                  <button [ngClass]="cssTableButtonClasses" (click)="dispatchFieldGoalAttemptedEvent(playerStatsLog, 1)">+</button>
+                  <button [ngClass]="cssTableButtonClasses" (click)="handleFtAttempted(player)">+</button>
                 </div>
               </td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchOffReboundEvent(playerStatsLog)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchDefReboundEvent(playerStatsLog)">+</button></td>
+              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="handleOffRebound(player)">+</button></td>
+              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="handleDefRebound(player)">+</button></td>
               <td class="w-10 px-1 py-0.5 text-xs text-center">---</td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchAssistsEvent(playerStatsLog)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchStealsEvent(playerStatsLog)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchBlocksEvent(playerStatsLog)">+</button></td>
-              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="dispatchTurnoversEvent(playerStatsLog)">+</button></td>
+              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="handleAssist(player)">+</button></td>
+              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="handleSteal(player)">+</button></td>
+              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="handleBlock(player)">+</button></td>
+              <td class="w-10 px-1 py-0.5 text-xs text-center"><button [ngClass]="cssTableButtonClasses" (click)="handleTurnover(player)">+</button></td>
               <td class="w-10 px-1 py-0.5 text-xs text-center">---</td>
             </tr>
           }

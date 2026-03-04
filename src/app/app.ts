@@ -104,37 +104,20 @@ export class App implements OnDestroy {
     this.pushEventLog(player, action);
   }
 
-  dispatchFieldGoalMadeEvent({ player }: PlayerStatsLog, value: number): void {
-    this.dispatchEvent(player, App.getFieldGoalMadeAction(value));
-  }
-
-  dispatchFieldGoalAttemptedEvent({ player }: PlayerStatsLog, value: number): void {
-    this.dispatchEvent(player, App.getFieldGoalAttemptedAction(value));
-  }
-
-  dispatchOffReboundEvent({ player }: PlayerStatsLog): void {
-    this.dispatchEvent(player, Action.OffRebound);
-  }
-
-  dispatchDefReboundEvent({ player }: PlayerStatsLog): void {
-    this.dispatchEvent(player, Action.DefRebound);
-  }
-
-  dispatchAssistsEvent({ player }: PlayerStatsLog): void {
-    this.dispatchEvent(player, Action.Assist);
-  }
-
-  dispatchStealsEvent({ player }: PlayerStatsLog): void {
-    this.dispatchEvent(player, Action.Steal);
-  }
-
-  dispatchBlocksEvent({ player }: PlayerStatsLog): void {
-    this.dispatchEvent(player, Action.Block);
-  }
-
-  dispatchTurnoversEvent({ player }: PlayerStatsLog): void {
-    this.dispatchEvent(player, Action.Turnover);
-  }
+  /* shooting events */
+  handleFgMade       = (player: Player) => this.dispatchEvent(player, Action.FieldGoalMade_2);
+  handleFgAttempted  = (player: Player) => this.dispatchEvent(player, Action.FieldGoalAttempted_2);
+  handleFg3Made      = (player: Player) => this.dispatchEvent(player, Action.FieldGoalMade_3);
+  handleFg3Attempted = (player: Player) => this.dispatchEvent(player, Action.FieldGoalAttempted_3);
+  handleFtMade       = (player: Player) => this.dispatchEvent(player, Action.FieldGoalMade_1);
+  handleFtAttempted  = (player: Player) => this.dispatchEvent(player, Action.FieldGoalAttempted_1);
+  /* other events */
+  handleOffRebound   = (player: Player) => this.dispatchEvent(player, Action.OffRebound);
+  handleDefRebound   = (player: Player) => this.dispatchEvent(player, Action.DefRebound);
+  handleAssist       = (player: Player) => this.dispatchEvent(player, Action.Assist);
+  handleSteal        = (player: Player) => this.dispatchEvent(player, Action.Steal);
+  handleBlock        = (player: Player) => this.dispatchEvent(player, Action.Block);
+  handleTurnover     = (player: Player) => this.dispatchEvent(player, Action.Turnover);
 
   dispatchMadeShotUpdateEvent(eventLog: EventLog, secondaryPlayer: Player | undefined): void {
     this.updateEventLog(eventLog, secondaryPlayer);
@@ -168,30 +151,6 @@ export class App implements OnDestroy {
         ...events,
       ];
     });
-  }
-
-  /**
-   * @param value
-   * @private
-   */
-  private static getFieldGoalMadeAction(value: number): ActionType {
-    switch (value) {
-      case 3:  return Action.FieldGoalMade_3;
-      case 2:  return Action.FieldGoalMade_2;
-      default: return Action.FieldGoalMade_1;
-    }
-  }
-
-  /**
-   * @param value
-   * @private
-   */
-  private static getFieldGoalAttemptedAction(value: number): ActionType {
-    switch (value) {
-      case 3:  return Action.FieldGoalAttempted_3;
-      case 2:  return Action.FieldGoalAttempted_2;
-      default: return Action.FieldGoalAttempted_1;
-    }
   }
 
   /* temp to reduce button pollution */
