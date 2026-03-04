@@ -9,12 +9,12 @@ export class StatsUtils {
    * Map of handled player actions.
    */
   static playerActionMap = new Map()
-    .set(Action.FieldGoalMade_1, "fieldGoalMade_1")
-    .set(Action.FieldGoalAttempted_1, "fieldGoalAttempted_1")
-    .set(Action.FieldGoalMade_2, "fieldGoalMade_2")
-    .set(Action.FieldGoalAttempted_2, "fieldGoalAttempted_2")
-    .set(Action.FieldGoalMade_3, "fieldGoalMade_3")
-    .set(Action.FieldGoalAttempted_3, "fieldGoalAttempted_3")
+    .set(Action.FieldGoalMade_2, "fgMade")
+    .set(Action.FieldGoalAttempted_2, "fgAttempted")
+    .set(Action.FieldGoalMade_3, "fg3Made")
+    .set(Action.FieldGoalAttempted_3, "fg3Attempted")
+    .set(Action.FieldGoalMade_1, "ftMade")
+    .set(Action.FieldGoalAttempted_1, "ftAttempted")
     .set(Action.OffRebound, "offRebounds")
     .set(Action.DefRebound, "defRebounds")
     .set(Action.Assist, "assists")
