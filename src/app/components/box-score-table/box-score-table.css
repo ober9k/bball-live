@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+.heading-row {
+  @apply border-b border-gray-300;
+  @apply bg-gray-200;
+}
+
+.descriptor-row,
+.totals-row {
+  @apply border-y border-gray-200;
+  @apply bg-gray-100;
+
+  &:last-child {
+    @apply border-b-0;
+  }
+}
+
+.stats-row {
+  @apply odd:bg-gray-100;
+}
+
+.heading-row,
+.descriptor-row,
+.stats-row,
+.totals-row {
+
+  th.name,
+  td.name {
+    @apply w-auto;
+    @apply px-2 py-1.5;
+    @apply text-xs text-left;
+  }
+
+  th.stat,
+  td.stat {
+    @apply w-10;
+    @apply px-1 py-1.5;
+    @apply text-xs text-center;
+
+    &.extended {
+      @apply w-14;
+    }
+
+  }
+}

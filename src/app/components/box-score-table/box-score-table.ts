@@ -11,6 +11,7 @@ import { Component, computed, input } from '@angular/core';
 @Component({
   selector: 'app-box-score-table',
   templateUrl: './box-score-table.html',
+  styleUrl: './box-score-table.css',
   standalone: true,
   imports: [
     PointsPipe,
