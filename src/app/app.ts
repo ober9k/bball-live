@@ -174,12 +174,12 @@ export class App implements OnDestroy {
   private static generatePlayerStatsLog(player: Player): PlayerStatsLog {
     const stats = {
       seconds: 0,
-      fieldGoalMade_1: 0,
-      fieldGoalAttempted_1: 0,
-      fieldGoalMade_2: 0,
-      fieldGoalAttempted_2: 0,
-      fieldGoalMade_3: 0,
-      fieldGoalAttempted_3: 0,
+      fgMade: 0,
+      fgAttempted: 0,
+      fg3Made: 0,
+      fg3Attempted: 0,
+      ftMade: 0,
+      ftAttempted: 0,
       offRebounds: 0,
       defRebounds: 0,
       assists: 0,

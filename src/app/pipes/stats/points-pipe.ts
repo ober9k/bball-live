@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PointsPipe implements PipeTransform {
   transform(stats: Stats): number {
     return (
-      stats.fieldGoalMade_1 + (stats.fieldGoalMade_2 * 2) + stats.fieldGoalMade_3
+      stats.ftMade + (stats.fgMade * 2) + stats.fg3Made
     );
   }
 }

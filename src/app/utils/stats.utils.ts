@@ -29,18 +29,18 @@ export class StatsUtils {
     /* handle extra logic for attempted when made show */
     switch (action) {
       case Action.FieldGoalMade_1:
-        stats.fieldGoalAttempted_1 += 1;
+        stats.ftAttempted += 1;
         break;
       case Action.FieldGoalMade_2:
-        stats.fieldGoalAttempted_2 += 1;
+        stats.fgAttempted += 1;
         break;
       case Action.FieldGoalMade_3:
-        stats.fieldGoalMade_2 += 1;
-        stats.fieldGoalAttempted_2 += 1;
-        stats.fieldGoalAttempted_3 += 1;
+        stats.fgMade += 1;
+        stats.fgAttempted += 1;
+        stats.fg3Attempted += 1;
         break;
       case Action.FieldGoalAttempted_3:
-        stats.fieldGoalAttempted_2 += 1;
+        stats.fgAttempted += 1;
         break;
     }
 
