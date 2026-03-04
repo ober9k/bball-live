@@ -21,45 +21,45 @@
     <tr class="descriptor-row">
       <th class="name" colspan="99">Starters</th>
     </tr>
-    @for (playerStatsLog of starterPlayerLogs(); track playerStatsLog.id) {
+    @for (log of starterPlayerLogs(); track log.id) {
       <tr class="stats-row">
         <td class="name">
-          <app-player-name [player]="playerStatsLog.player" [active]="playerStatsLog.active" />
+          <app-player-name [player]="log.player" [active]="log.active" />
         </td>
-        <td class="stat extended">{{ playerStatsLog.stats.seconds | minutes }}</td>
-        <td class="stat extended">{{ playerStatsLog.stats | madeAndAttempted: 'fg' }}</td>
-        <td class="stat extended">{{ playerStatsLog.stats | madeAndAttempted: 'fg3' }}</td>
-        <td class="stat extended">{{ playerStatsLog.stats | madeAndAttempted: 'ft' }}</td>
-        <td class="stat">{{ playerStatsLog.stats.offRebounds }}</td>
-        <td class="stat">{{ playerStatsLog.stats.defRebounds }}</td>
-        <td class="stat">{{ playerStatsLog.stats | rebounds }}</td>
-        <td class="stat">{{ playerStatsLog.stats.assists }}</td>
-        <td class="stat">{{ playerStatsLog.stats.steals }}</td>
-        <td class="stat">{{ playerStatsLog.stats.blocks }}</td>
-        <td class="stat">{{ playerStatsLog.stats.turnovers }}</td>
-        <th class="stat">{{ playerStatsLog.stats | points }}</th>
+        <td class="stat extended">{{ log.stats.seconds | minutes }}</td>
+        <td class="stat extended">{{ log.stats | madeAndAttempted: 'fg' }}</td>
+        <td class="stat extended">{{ log.stats | madeAndAttempted: 'fg3' }}</td>
+        <td class="stat extended">{{ log.stats | madeAndAttempted: 'ft' }}</td>
+        <td class="stat">{{ log.stats.offRebounds }}</td>
+        <td class="stat">{{ log.stats.defRebounds }}</td>
+        <td class="stat">{{ log.stats | rebounds }}</td>
+        <td class="stat">{{ log.stats.assists }}</td>
+        <td class="stat">{{ log.stats.steals }}</td>
+        <td class="stat">{{ log.stats.blocks }}</td>
+        <td class="stat">{{ log.stats.turnovers }}</td>
+        <th class="stat">{{ log.stats | points }}</th>
       </tr>
     }
     <tr class="descriptor-row">
       <th class="name" colspan="99">Bench</th>
     </tr>
-    @for (playerStatsLog of benchPlayerLogs(); track playerStatsLog.id) {
+    @for (log of benchPlayerLogs(); track log.id) {
       <tr class="stats-row">
         <td class="name">
-          <app-player-name [player]="playerStatsLog.player" [active]="playerStatsLog.active" />
+          <app-player-name [player]="log.player" [active]="log.active" />
         </td>
-        <td class="stat extended">{{ playerStatsLog.stats.seconds | minutes }}</td>
-        <td class="stat extended">{{ playerStatsLog.stats | madeAndAttempted: 'fg' }}</td>
-        <td class="stat extended">{{ playerStatsLog.stats | madeAndAttempted: 'fg3' }}</td>
-        <td class="stat extended">{{ playerStatsLog.stats | madeAndAttempted: 'ft' }}</td>
-        <td class="stat">{{ playerStatsLog.stats.offRebounds }}</td>
-        <td class="stat">{{ playerStatsLog.stats.defRebounds }}</td>
-        <td class="stat">{{ playerStatsLog.stats | rebounds }}</td>
-        <td class="stat">{{ playerStatsLog.stats.assists }}</td>
-        <td class="stat">{{ playerStatsLog.stats.steals }}</td>
-        <td class="stat">{{ playerStatsLog.stats.blocks }}</td>
-        <td class="stat">{{ playerStatsLog.stats.turnovers }}</td>
-        <th class="stat">{{ playerStatsLog.stats | points }}</th>
+        <td class="stat extended">{{ log.stats.seconds | minutes }}</td>
+        <td class="stat extended">{{ log.stats | madeAndAttempted: 'fg' }}</td>
+        <td class="stat extended">{{ log.stats | madeAndAttempted: 'fg3' }}</td>
+        <td class="stat extended">{{ log.stats | madeAndAttempted: 'ft' }}</td>
+        <td class="stat">{{ log.stats.offRebounds }}</td>
+        <td class="stat">{{ log.stats.defRebounds }}</td>
+        <td class="stat">{{ log.stats | rebounds }}</td>
+        <td class="stat">{{ log.stats.assists }}</td>
+        <td class="stat">{{ log.stats.steals }}</td>
+        <td class="stat">{{ log.stats.blocks }}</td>
+        <td class="stat">{{ log.stats.turnovers }}</td>
+        <th class="stat">{{ log.stats | points }}</th>
       </tr>
     }
     </tbody>
@@ -67,24 +67,24 @@
     <tr class="totals-row">
       <th class="name">Totals</th>
       <th class="stat">&nbsp;</th>
-      <th class="stat extended">{{ playerStatsTotals() | madeAndAttempted: 'fg' }}</th>
-      <th class="stat extended">{{ playerStatsTotals() | madeAndAttempted: 'fg3' }}</th>
-      <th class="stat extended">{{ playerStatsTotals() | madeAndAttempted: 'ft' }}</th>
-      <th class="stat">{{ playerStatsTotals().offRebounds }}</th>
-      <th class="stat">{{ playerStatsTotals().defRebounds }}</th>
-      <th class="stat">{{ playerStatsTotals() | rebounds }}</th>
-      <th class="stat">{{ playerStatsTotals().assists }}</th>
-      <th class="stat">{{ playerStatsTotals().steals }}</th>
-      <th class="stat">{{ playerStatsTotals().blocks }}</th>
-      <th class="stat">{{ playerStatsTotals().turnovers }}</th>
-      <th class="stat">{{ playerStatsTotals() | points }}</th>
+      <th class="stat extended">{{ totals() | madeAndAttempted: 'fg' }}</th>
+      <th class="stat extended">{{ totals() | madeAndAttempted: 'fg3' }}</th>
+      <th class="stat extended">{{ totals() | madeAndAttempted: 'ft' }}</th>
+      <th class="stat">{{ totals().offRebounds }}</th>
+      <th class="stat">{{ totals().defRebounds }}</th>
+      <th class="stat">{{ totals() | rebounds }}</th>
+      <th class="stat">{{ totals().assists }}</th>
+      <th class="stat">{{ totals().steals }}</th>
+      <th class="stat">{{ totals().blocks }}</th>
+      <th class="stat">{{ totals().turnovers }}</th>
+      <th class="stat">{{ totals() | points }}</th>
     </tr>
     <tr class="totals-row">
       <th class="name">&nbsp;</th>
       <th class="stat">&nbsp;</th>
-      <th class="stat extended">{{ playerStatsTotals() | madeAndAttemptedPercentage: 'fg' }}</th>
-      <th class="stat extended">{{ playerStatsTotals() | madeAndAttemptedPercentage: 'fg3' }}</th>
-      <th class="stat extended">{{ playerStatsTotals() | madeAndAttemptedPercentage: 'ft' }}</th>
+      <th class="stat extended">{{ totals() | madeAndAttemptedPercentage: 'fg' }}</th>
+      <th class="stat extended">{{ totals() | madeAndAttemptedPercentage: 'fg3' }}</th>
+      <th class="stat extended">{{ totals() | madeAndAttemptedPercentage: 'ft' }}</th>
       <th class="stat" colspan="99">&nbsp;</th>
     </tr>
     </tfoot>

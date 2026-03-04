@@ -33,6 +33,10 @@ export class BoxScoreTable {
       .reduce(StatsUtils.accumulatePlayerStats, StatsUtils.generateEmptyStats());
   });
 
+  /* alias for IDE limitations */
+  /* similarly for log */
+  totals = this.playerStatsTotals;
+
   /* temporary... strategy tbd */
   starterPlayerLogs = computed(() => {
     return this.playerStatsLogs()
