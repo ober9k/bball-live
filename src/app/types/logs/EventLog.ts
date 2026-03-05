@@ -13,6 +13,9 @@ export const Action = {
   Steal:                "steal",
   Block:                "block",
   Turnover:             "turnover",
+  /* special cases */
+  SubstitutionOut:      "substitutionOut",
+  SubstitutionIn:       "substitutionIn",
 } as const;
 
 export type ActionType = typeof Action[keyof typeof Action];

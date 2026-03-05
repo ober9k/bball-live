@@ -64,6 +64,10 @@ export class PlayByPlayRow {
         return "blocked attempted shot."; /* link to missed 2/3 */
       case Action.Turnover:
         return "turned the ball over.";
+      case Action.SubstitutionOut:
+        return "subbed out of the game.";
+      case Action.SubstitutionIn:
+        return "subbed into the game.";
       default:
         return "did something.";
     }
