@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+.backdrop {
+  @apply fixed top-0 left-0;
+  @apply bg-black/50;
+  @apply h-full w-full;
+  @apply z-1;
+}
+
+.modal {
+  @apply fixed top-4;
+  @apply mx-auto w-120;
+  @apply bg-white;
+  @apply z-2;
+
+  /* temp, style children instead */
+  @apply p-2;
+}
+
+.close {
+  @apply absolute top-1.5 right-2.5;
+  @apply font-bold;
+  @apply cursor-pointer;
+}

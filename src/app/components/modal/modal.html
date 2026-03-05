@@ -1,0 +1,9 @@
+@if (open()) {
+  <div class="backdrop" (click)="handleClose()"></div>
+}
+<dialog class="modal" [open]="open()">
+  <button class="close" (click)="handleClose()">&times;</button>
+  <div class="modal-body">
+    <ng-content />
+  </div>
+</dialog>
