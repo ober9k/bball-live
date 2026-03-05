@@ -21,12 +21,17 @@
         </div>
       </div>
       <div class="flex gap-1 justify-center p-1 pb-2">
-        <button [ngClass]="cssButtonClasses" (click)="startTimer()">Start</button>
-        <button [ngClass]="cssButtonClasses" (click)="pauseTimer()">Pause</button>
-        <button [ngClass]="cssButtonClasses" (click)="resetTimer()">Reset</button>
-        <button [ngClass]="cssButtonClasses" (click)="triggerModal()">Substitutions</button>
+        <button class="f-button" [ngClass]="cssButtonClasses" (click)="startTimer()">Start</button>
+        <button class="f-button" [ngClass]="cssButtonClasses" (click)="pauseTimer()">Pause</button>
+        <button class="f-button" [ngClass]="cssButtonClasses" (click)="resetTimer()">Reset</button>
+      </div>
+      <div class="flex gap-1 justify-center p-1 pb-2">
+        <button class="f-button f-primary" (click)="triggerModal()">Substitutions</button>
       </div>
     </div>
+    <app-modal [(open)]="open">
+      <app-substitutions [playerStatsLogs]="playerStatsLogs()" [remainingSeconds]="remainingSeconds()" (onClose)="cancelSubstitutions()" />
+    </app-modal>
     <div class="border-1 border-gray-300">
       <table class="w-full">
         <thead>
