@@ -1,0 +1,25 @@
+<h2>
+  Player Substitutions
+</h2>
+@if (activePlayersLogs().length !== 5) {
+  <p class="m-2 p-2 px-3 border border-red-300 bg-red-100 rounded text-sm text-red-900">
+    <strong class="font-medium">Error</strong><br/>
+    A total of 5 active players must be selected.
+  </p>
+}
+<h3>Active Players</h3>
+<div class="flex flex-wrap gap-1">
+  @for (log of activePlayersLogs(); track log.id) {
+    <button [ngClass]="cssButtonClasses" (click)="handleActivePlayerLog(log)">{{ log.player.name }}</button>
+  }
+</div>
+<h3>Inactive Players</h3>
+<div class="flex flex-wrap gap-1">
+  @for (log of inactivePlayersLogs(); track log.id) {
+    <button [ngClass]="cssButtonClasses" (click)="handleInactivePlayerLog(log)">{{ log.player.name }}</button>
+  }
+</div>
+<div class="flex flex-wrap gap-1 p-2 justify-center">
+  <button (click)="cancelSubstitutions()" class="p-0.5 px-1.5 border border-gray-300 bg-gray-100 rounded text-sm cursor-pointer hover:bg-gray-200">Cancel</button>
+  <button (click)="confirmSubstitutions()" class="p-0.5 px-1.5 border border-blue-500 bg-blue-500 rounded font-medium text-white text-sm cursor-pointer hover:bg-blue-600 disabled:cursor-not-allowed disabled:hover:bg-blue-500" [disabled]="activePlayersLogs().length !== 5">Confirm</button>
+</div>

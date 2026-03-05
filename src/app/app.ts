@@ -1,9 +1,10 @@
 import { BoxScoreTable } from '@/components/box-score-table/box-score-table';
+import { Modal } from '@/components/modal/modal';
 import { PlayByPlayRow } from '@/components/play-by-play/play-by-play-row/play-by-play-row';
+import { Substitutions } from '@/components/substitutions/substitutions';
 import { mockPlayers } from '@/data/mock/players';
 import { EventLogService } from '@/services/event-log.service';
 import { Action, ActionType, EventLog } from '@/types/logs/EventLog';
-import { PlayerStatsLog } from '@/types/logs/PlayerStatsLog';
 import { Player } from '@/types/Player';
 import { StatsUtils } from '@/utils/stats.utils';
 import { NgClass } from '@angular/common';
@@ -12,13 +13,16 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BoxScoreTable, NgClass, PlayByPlayRow],
+  imports: [RouterOutlet, BoxScoreTable, NgClass, PlayByPlayRow, Modal, Substitutions],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,
 })
 export class App implements OnDestroy {
   protected readonly title = signal('bball-live');
+
+  open = signal(false);
+
 
   protected eventLogService = inject(EventLogService);
 
@@ -50,22 +54,33 @@ export class App implements OnDestroy {
       }
 
       const { player, secondaryPlayer, action } = event;
-      const { stats } = playerStatsLogs.find((log) => log.player.id === player.id)!; /* expect it */
+      const log = playerStatsLogs.find((log) => log.player.id === player.id)!; /* expect it */
+      const { stats } = log;
 
-      StatsUtils.applyAction(action, stats);
-
-      /* need generic handling */
-      if (secondaryPlayer) {
-        const { stats } = playerStatsLogs.find((log) => log.player.id === secondaryPlayer.id)! /* expect it */
-        StatsUtils.applyAction(Action.Assist, stats); /* apply secondary stat for the assist */
-      }
-
-      /* temp logic... just throw the seconds on everyone */
-      playerStatsLogs.forEach((log) => {
-        if (log.active) {
-          log.stats.seconds = log.stats.seconds + (secondsCounter - event.seconds);
+      if (action === Action.SubstitutionOut || action === Action.SubstitutionIn) {
+        if (action === Action.SubstitutionOut) {
+          log.active = false;
         }
-      })
+        if (action === Action.SubstitutionIn) {
+          log.active = true;
+        }
+      }
+      else {
+        StatsUtils.applyAction(action, stats);
+
+        /* need generic handling */
+        if (secondaryPlayer) {
+          const { stats } = playerStatsLogs.find((log) => log.player.id === secondaryPlayer.id)! /* expect it */
+          StatsUtils.applyAction(Action.Assist, stats); /* apply secondary stat for the assist */
+        }
+
+        /* temp logic... just throw the seconds on everyone */
+        playerStatsLogs.forEach((log) => {
+          if (log.active) {
+            log.stats.seconds = log.stats.seconds + (secondsCounter - event.seconds);
+          }
+        });
+      }
 
       /* reset seconds to event timing */
       secondsCounter = event.seconds;
@@ -73,6 +88,14 @@ export class App implements OnDestroy {
 
     return playerStatsLogs;
   });
+
+  triggerModal() {
+    this.open.set(true);
+  }
+
+  cancelSubstitutions(): void {
+    this.open.set(false);
+  }
 
   players = computed(() => {
     return this.playerStatsLogs()
