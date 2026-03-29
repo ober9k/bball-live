@@ -1,5 +1,5 @@
 # bball-live
 
-experimental live scoring
+This is mostly just an experimental project for working with a live boxscore for basketball games allowing the statistician to track events during the game such as scoring, rebounding, etc. within a basic interface.
 
-This is mostly just an experimental project which will later be integrated into a larger project once the prototype has evolved to the desired extent.
+The intent is that this prototype will eventually later be tidied up intergrated into a larger project once it has evolved to the desired extent.
