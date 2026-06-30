@@ -29,6 +29,10 @@
         <button class="f-button f-primary" (click)="triggerModal()">Substitutions</button>
       </div>
     </div>
+    <div style="border: 1px solid #efefef; margin: 16px; padding: 16px;">
+      <app-assist-modal [playerStatsLogs]="playerStatsLogs()" />
+    </div>
+
     <app-modal [(open)]="open">
       <app-substitutions [playerStatsLogs]="playerStatsLogs()" [remainingSeconds]="remainingSeconds()" (onClose)="cancelSubstitutions()" />
     </app-modal>

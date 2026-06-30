@@ -1,5 +1,6 @@
 import { BoxScoreTable } from '@/components/box-score-table/box-score-table';
 import { Modal } from '@/components/modal/modal';
+import { AssistModal } from '@/components/modals/assist-modal/assist-modal';
 import { PlayByPlayRow } from '@/components/play-by-play/play-by-play-row/play-by-play-row';
 import { Substitutions } from '@/components/substitutions/substitutions';
 import { mockPlayers } from '@/data/mock/players';
@@ -13,7 +14,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BoxScoreTable, NgClass, PlayByPlayRow, Modal, Substitutions],
+  imports: [RouterOutlet, BoxScoreTable, NgClass, PlayByPlayRow, Modal, Substitutions, AssistModal],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,
@@ -152,9 +153,13 @@ export class App implements OnDestroy {
   }
 
   /* shooting events */
-  handleFgMade       = (player: Player) => this.dispatchEvent(player, Action.FieldGoalMade_2);
+  handleFgMade       = (player: Player) => {
+    this.dispatchEvent(player, Action.FieldGoalMade_2);
+  }
   handleFgAttempted  = (player: Player) => this.dispatchEvent(player, Action.FieldGoalAttempted_2);
-  handleFg3Made      = (player: Player) => this.dispatchEvent(player, Action.FieldGoalMade_3);
+  handleFg3Made      = (player: Player) => {
+    this.dispatchEvent(player, Action.FieldGoalMade_3);
+  }
   handleFg3Attempted = (player: Player) => this.dispatchEvent(player, Action.FieldGoalAttempted_3);
   handleFtMade       = (player: Player) => this.dispatchEvent(player, Action.FieldGoalMade_1);
   handleFtAttempted  = (player: Player) => this.dispatchEvent(player, Action.FieldGoalAttempted_1);
@@ -175,6 +180,12 @@ export class App implements OnDestroy {
   }
 
   private pushEventLog(player: Player, action: ActionType): void {
+    this.eventLogService.pushEventLog(
+      action, player, this.remainingSeconds(),
+    );
+  }
+
+  private pushEventLogWithSecondaryPlayer(player: Player, action: ActionType, secondaryPlayer: Player | undefined): void {
     this.eventLogService.pushEventLog(
       action, player, this.remainingSeconds(),
     );
